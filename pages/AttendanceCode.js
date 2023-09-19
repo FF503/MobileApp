@@ -1,5 +1,5 @@
-import React, {useState} from 'react';
- 
+import React, { useState } from 'react';
+
 import {
   SafeAreaView,
   Text,
@@ -9,21 +9,25 @@ import {
   PermissionsAndroid,
   Platform,
   StyleSheet,
-  Alert
+  Alert,
+  TouchableOpacity,
+  Image,
+  TextInput
 } from 'react-native';
 
-import {CameraKitCameraScreen} from 'react-native-camera-kit';
-import { CameraScreen } from 'react-native-camera-kit';
+//import {CameraKitCameraScreen} from 'react-native-camera-kit';
+//import { CameraScreen } from 'react-native-camera-kit';
 
 const AttendanceCode = () => {
   const [qrvalue, setQrvalue] = useState('');
-  const [opneScanner, setOpneScanner] = useState(true);
- 
+  const [opneScanner, setOpneScanner] = useState(false);
+  const [number, onChangeNumber] = useState('');
+
   const onOpenlink = () => {
     // If scanned then function to open URL in Browser
     Linking.openURL(qrvalue);
   };
- 
+
   // const onBarcodeScan = (qrvalue) => {
   //   // Called after te successful scanning of QRCode/Barcode
   //   setQrvalue(qrvalue);
@@ -46,7 +50,7 @@ const AttendanceCode = () => {
       ],
     );
   };
- 
+
   const onOpneScanner = () => {
     // To Start Scanning
     if (Platform.OS === 'android') {
@@ -78,11 +82,11 @@ const AttendanceCode = () => {
       setOpneScanner(true);
     }
   };
- 
+
   return (
-    <SafeAreaView style={{flex: 1}}>
+    <SafeAreaView style={{}}>
       {opneScanner ? (
-        <View style={{flex: 1}}>
+        <View style={{ flex: 1 }}>
           <CameraScreen
             // Barcode props
             scanBarcode={true}
@@ -90,39 +94,62 @@ const AttendanceCode = () => {
             showFrame={true} // (default false) optional, show frame with transparent layer (qr code or barcode will be read on this area ONLY), start animation for scanner,that stoped when find any code. Frame always at center of the screen
             laserColor='red' // (default red) optional, color of laser in scanner frame
             frameColor='white' // (default white) optional, color of border of scanner frame
-            />
+          />
         </View>
       ) : (
-        <View style={styles.container}>
-          <Text style={styles.titleText}>
-            {qrvalue ? 'Scanned Result: ' + qrvalue : ''}
-          </Text>
-          
-          <TouchableHighlight
-            onPress={onOpneScanner}
-            style={styles.buttonStyle}>
-            <Text style={styles.buttonTextStyle}>
-              Scan Again?
-            </Text>
-          </TouchableHighlight>
+        // <View style={styles.container}>
+        //   <View style={{flexDirection: 'row'}}>
+        //     <Text style={styles.titleText}>Attendance</Text>
+        //     {/* <TouchableOpacity>
+        //       <Image source={require("../images/cameraIconPink.png")}/>
+        //     </TouchableOpacity> */}
+        //   </View>
+        //   {/* <TouchableHighlight
+        //     onPress={onOpneScanner}
+        //     style={styles.buttonStyle}>
+        //     <Text style={styles.buttonTextStyle}>
+        //       Scan Again?
+        //     </Text>
+        //   </TouchableHighlight> */}
+        // </View>
+        <View style={{ flexDirection: 'column', margin: 10, flex: 1 }}>
+          <View style={{ flexDirection: 'row', flex: 2}}>
+            <Text style={{ flex: 3, fontSize: 35, color: 'black' }}>Attendance</Text>
+            <TouchableOpacity style={{ flex: 1 }}>
+              <Image style={{ width: 50, height: 50 }} source={require("../images/cameraIconPink.png")} />
+            </TouchableOpacity>
+          </View>
+          <View style={{flexDirection: 'row', flex: 3}}>
+            <TextInput
+              style={[styles.input, {flex: 2}]}
+              onChangeText={onChangeNumber}
+              value={number}
+              placeholder="useless placeholder"
+              keyboardType="numeric"
+            />
+            <View style={{flex: 0.5}}></View>
+            <TouchableOpacity style={{ flex: 1, borderWidth: 1}}>
+              <Text>Submit</Text>
+            </TouchableOpacity>
+          </View>
         </View>
       )}
     </SafeAreaView>
   );
 };
- 
+
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    //flex: 1,
     backgroundColor: 'white',
-    padding: 10,
+    //padding: 10,
     alignItems: 'center',
   },
   titleText: {
     fontSize: 22,
     textAlign: 'center',
     fontWeight: 'bold',
-    marginBottom: 20
+    marginTop: 20
   },
   textStyle: {
     color: 'black',
@@ -146,6 +173,12 @@ const styles = StyleSheet.create({
   textLinkStyle: {
     color: 'blue',
     paddingVertical: 20,
+  },
+  input: {
+    height: 40,
+    //margin: 12,
+    borderWidth: 1,
+    padding: 10,
   },
 });
 

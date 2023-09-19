@@ -108,11 +108,11 @@ const RosterReqs = () => {
                     </View>
                 </ScrollView>
         
-                <ExpandableListView
+                {/* <ExpandableListView
                     data={CONTENT} // required
                     onInnerItemClick={handleInnerItemClick}
                     onItemClick={handleItemClick}
-                />
+                /> */}
             </View>
         </ScrollView>
         </View>
