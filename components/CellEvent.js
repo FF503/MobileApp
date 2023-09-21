@@ -16,13 +16,15 @@ export default function CellEvent({ detail, prop }) {
     if (prop == 'input') {
         //Input Component
         comp = <TextInput
-            style={Stylesheet.input}
+            style={styles.input}
             onChangeText={onChangeNumber}
             value={number}
             placeholder=""
         />
     } else if (prop == 'scroll') {
-        comp = <ScrollPicker
+        comp = 
+        <View style={styles.scrollViewPick}>
+            <ScrollPicker
             dataSource = {['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21']}
             selectedIndex = {index}
             //
@@ -36,8 +38,9 @@ export default function CellEvent({ detail, prop }) {
             itemHeight = {20}
             highlightColor = "#d8d8d8"
             highlightBorderWidth = {1}
-
         />
+        </View>
+        
     } else if (prop == 'calander') {
         comp = <Text> calander prop will be completed soon hopefully </Text>
     } else if (prop == 'dropdown') {
@@ -61,7 +64,8 @@ const styles = StyleSheet.create({
         borderWidth: 1, 
         marginTop: 5, 
         borderRadius: 10, 
-        backgroundColor: '#303030'
+        backgroundColor: '#303030',
+        flexDirection: 'row'
     }, 
 
     detailText: {
@@ -83,5 +87,14 @@ const styles = StyleSheet.create({
         paddingLeft: 10, 
         color: 'white'
     },
+
+    scrollViewPick: {
+        width: "55%",
+        height: '65%', 
+        justifyContent: 'center', 
+        // borderWidth: 0.5, 
+        // borderColor: 'white',
+        marginBottom: 5
+    }
 })
 

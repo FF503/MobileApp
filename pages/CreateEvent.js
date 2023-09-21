@@ -4,8 +4,6 @@ import CellEvent from '../components/CellEvent';
 
 export default function CreateEvent() {
 
-
-
     return(
         <View style={styles.container}>
             <View style={styles.eventCont}>
@@ -48,13 +46,16 @@ const styles = StyleSheet.create({
     },
 
     eventCont: {
-        marginTop: '12%', 
+        marginTop: 10, 
+        height: 60, 
         width: '100%',
+        alignItems: 'center',
+        justifyContent: 'center'
     },
 
     eventText: {
         fontSize: 40, 
-        color: 'white',
+        color: 'black',
     }, 
 
     cellCont: {

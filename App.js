@@ -1,12 +1,11 @@
 import React from 'react'
-import {View} from 'react-native'
+import {Text, View} from 'react-native'
+import CreateEvent from './pages/CreateEvent'
 
-const App = () => {
+export default function App() {
   return(
     <View>
-
+        <CreateEvent></CreateEvent>
     </View>
-  )
+  );
 }
-
-export default App;
