@@ -1,6 +1,7 @@
 import React from 'react';
 import ScrollPicker from  "react-native-wheel-scrollview-picker";
 import { Stylesheet, Text, View, TextInput, StyleSheet } from 'react-native';
+import RNPickerSelect from 'react-native-picker-select';
 
 export default function CellEvent({ detail, prop }) {
 
@@ -44,7 +45,15 @@ export default function CellEvent({ detail, prop }) {
     } else if (prop == 'calander') {
         comp = <Text> calander prop will be completed soon hopefully </Text>
     } else if (prop == 'dropdown') {
-        comp = <Text> dropdown prop will be complete soon hopefully </Text>
+        comp = 
+        <RNPickerSelect
+            onValueChange={(value) => console.log(value)}
+            items={[
+                { label: 'FIRST Workshop', value: 'FIRST Workshop' },
+                { label: 'Community Outreach', value: 'Community Outreach' },
+                { label: 'Community Service', value: 'Community Service' },
+            ]}
+        />
     }
 
     return(
