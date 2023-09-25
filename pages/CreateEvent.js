@@ -7,7 +7,7 @@ export default function CreateEvent() {
     return(
         <View style={styles.container}>
             <View style={styles.eventCont}>
-                <Text style={styles.eventText}> Create Event</Text>
+                <Text style={styles.eventText}> Create Event: </Text>
             </View>
             <View style={styles.cellCont}>
                 <CellEvent detail='Event Name:' prop='input'>
@@ -25,7 +25,10 @@ export default function CreateEvent() {
                 <CellEvent detail='Mentor Lead:' prop='input'>
                     
                 </CellEvent>
-                <CellEvent detail='Date:' prop='input'>
+                <CellEvent detail='Start Date:' prop='calander'>
+                    
+                </CellEvent>
+                <CellEvent detail='End Date:' prop='calander'>
                     
                 </CellEvent>
                 <CellEvent detail='Event Type:' prop='dropdown'>
@@ -47,15 +50,17 @@ const styles = StyleSheet.create({
 
     eventCont: {
         marginTop: 10, 
-        height: 60, 
+        height: 40, 
         width: '100%',
-        alignItems: 'center',
-        justifyContent: 'center'
+        alignItems: 'left',
+        justifyContent: 'left',
+        marginLeft: 10, 
     },
 
     eventText: {
-        fontSize: 40, 
+        fontSize: 30, 
         color: 'black',
+        fontWeight: 'bold'
     }, 
 
     cellCont: {

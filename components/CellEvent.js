@@ -1,7 +1,8 @@
 import React from 'react';
 import ScrollPicker from  "react-native-wheel-scrollview-picker";
 import { Stylesheet, Text, View, TextInput, StyleSheet } from 'react-native';
-import RNPickerSelect from 'react-native-picker-select';
+import { Dropdown } from 'react-native-element-dropdown';
+import { Fontisto } from 'react-native-vector-icons/Fontisto'
 
 export default function CellEvent({ detail, prop }) {
 
@@ -13,6 +14,16 @@ export default function CellEvent({ detail, prop }) {
     const onValueChange = (data, selectedIndex) => {
         setIndex(selectedIndex);
     };
+
+    const dropdownData = [
+        { label: "Team Meeting", value: 1}, 
+        { label: "Offseason Competition", value: 2}, 
+        { label: "Group Traning", value: 3}, 
+        { label: "FIRST Workshop", value: 4}, 
+        { label: "Community Service", value: 5}, 
+        { label: "Community Outreach", value: 6}
+    ]
+    const [value, setValue] = React.useState(null)
 
     if (prop == 'input') {
         //Input Component
@@ -43,16 +54,25 @@ export default function CellEvent({ detail, prop }) {
         </View>
         
     } else if (prop == 'calander') {
-        comp = <Text> calander prop will be completed soon hopefully </Text>
+        comp = 
+        <View style={styles.input}> 
+            
+        </View>
     } else if (prop == 'dropdown') {
         comp = 
-        <RNPickerSelect
-            onValueChange={(value) => console.log(value)}
-            items={[
-                { label: 'FIRST Workshop', value: 'FIRST Workshop' },
-                { label: 'Community Outreach', value: 'Community Outreach' },
-                { label: 'Community Service', value: 'Community Service' },
-            ]}
+        <Dropdown
+            style={styles.dropdown}
+            placeholderStyle={styles.placeholderStyle}
+            selectedTextStyle={styles.selectedTextStyle}
+            data={dropdownData}
+            maxHeight={300}
+            labelField={"label"}
+            valueField={"value"}
+            placeholder={'Select the Event Type'}
+            value={value}
+            onChange={item => {
+                setValue(item.value)
+            }}
         />
     }
 
@@ -94,7 +114,8 @@ const styles = StyleSheet.create({
         borderWidth: 1, 
         borderColor: '#525252', 
         paddingLeft: 10, 
-        color: 'white'
+        color: 'white', 
+        textAlign: 'center'
     },
 
     scrollViewPick: {
@@ -104,6 +125,30 @@ const styles = StyleSheet.create({
         // borderWidth: 0.5, 
         // borderColor: 'white',
         marginBottom: 5
+    },
+
+    dropdown: {
+        height: '60%', 
+        width: '55%', 
+        borderWidth: 1, 
+        borderRadius: 10, 
+        borderWidth: 1, 
+        borderColor: '#525252', 
+        paddingLeft: 10, 
+        color: 'white', 
+        textAlign: 'center'
+    }, 
+
+    selectedTextStyle: {
+        fontSize: 16, 
+        color: "white", 
+        textAlign: 'center'
+    },
+
+    placeholderStyle: {
+        fontSize: 16, 
+        color: "white",
+        textAlign: 'center'
     }
 })
 
