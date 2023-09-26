@@ -28,7 +28,7 @@ export default function CreateEvent() {
                 <CellEvent detail='Start Date:' prop='calander'>
                     
                 </CellEvent>
-                <CellEvent detail='End Date:' prop='calander'>
+                <CellEvent detail='End Date:' prop='input'>
                     
                 </CellEvent>
                 <CellEvent detail='Event Type:' prop='dropdown'>
@@ -60,7 +60,7 @@ const styles = StyleSheet.create({
     eventText: {
         fontSize: 30, 
         color: 'black',
-        fontWeight: 'bold'
+        fontWeight: 'bold',
     }, 
 
     cellCont: {
