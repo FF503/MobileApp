@@ -22,17 +22,30 @@ import ProgressCircle from 'react-native-progress-circle'
 //import {CameraKitCameraScreen} from 'react-native-camera-kit';
 //import { CameraScreen } from 'react-native-camera-kit';
 
+const dropdownTitle = (props) => {
+  return (
+    <View>
+      <TouchableOpacity>
+        <View style={[{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }]}>
+          <Text style={styles.text}>{props}</Text>
+          <Image style={{ width: 15, height: 15, borderColor: 'black' }} source={require("../images/arrow.png")} />
+        </View>
+      </TouchableOpacity>
+    </View>
+  )
+}
+
 const AttendanceCode = () => {
   const [qrvalue, setQrvalue] = useState('');
   const [opneScanner, setOpneScanner] = useState(false);
   const [number, onChangeNumber] = useState('');
   const [data, setData] = useState({
     tableHead: ['Requirement', 'Goal', 'Attended', 'Possible', 'Percent', 'Status'],
-    tableTitle: ['Team Meeting', 'FIRST Workshops', 'Community Outreach', 'Community Service', 'Off Season Competition', 'YPP Training', 'Saftey Training'],
+    tableTitle: [dropdownTitle('Team Meeting'), 'FIRST Workshops', 'Community Outreach', 'Community Service', 'Off Season Competition', 'YPP Training', 'Saftey Training'],
     //flexArray: [75, 25, 55, 10, 90, 90, 75],
     flexArray: [1, 1, 1, 1, 1, 1, 1],
     flexArray2: [48, 13, 20, 20, 20, 50],
-    widthArray: [110, 80, 80, 80, 90, 85,],
+    widthArray: [130, 80, 80, 80, 90, 85,],
     widthArray2: [80, 80, 80, 90, 85,],
     tableData: [
       ['1', '2', '3', '4', '5'],
@@ -119,21 +132,6 @@ const AttendanceCode = () => {
           />
         </View>
       ) : (
-        // <View style={styles.container}>
-        //   <View style={{flexDirection: 'row'}}>
-        //     <Text style={styles.titleText}>Attendance</Text>
-        //     {/* <TouchableOpacity>
-        //       <Image source={require("../images/cameraIconPink.png")}/>
-        //     </TouchableOpacity> */}
-        //   </View>
-        //   {/* <TouchableHighlight
-        //     onPress={onOpneScanner}
-        //     style={styles.buttonStyle}>
-        //     <Text style={styles.buttonTextStyle}>
-        //       Scan Again?
-        //     </Text>
-        //   </TouchableHighlight> */}
-        // </View>
         <ScrollView>
           <View style={{ flexDirection: 'column', margin: 10 }}>
             <View style={{ flexDirection: 'row', }}>
@@ -181,12 +179,13 @@ const AttendanceCode = () => {
             <ScrollView horizontal={true}>
               <View>
                 <Table borderStyle={{ borderWidth: 1, borderColor: '' }}>
-                  <Row data={data.tableHead} style={styles.head} height={40} widthArr={data.widthArray} textStyle={styles.text} />
+                  <Row data={data.tableHead} style={[styles.head, { backgroundColor: 'pink' }]} height={40} widthArr={data.widthArray} textStyle={styles.text} />
                   <TableWrapper style={styles.wrapper}>
-                    <Col data={data.tableTitle} style={styles.title} width={110} heightArr={[40, 40, 40, 40, 40, 40, 40]} textStyle={styles.text} />
+                    <Col data={data.tableTitle} style={styles.title} width={130} heightArr={[40, 40, 40, 40, 40, 40, 40]} textStyle={styles.text} />
                     <Rows data={data.tableData} style={styles.row} height={40} widthArr={data.widthArray2} textStyle={styles.text} />
                   </TableWrapper>
                 </Table>
+
               </View>
             </ScrollView>
           </View>
