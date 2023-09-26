@@ -1,8 +1,9 @@
 import React from 'react';
 import {View, Text, StyleSheet, ScrollView} from 'react-native';
 import ProgressCircle from 'react-native-progress-circle'
-import { Table, Row, Rows, Col, TableWrapper } from 'react-native-table-component';
+//import { Table, Row, Rows, Col, TableWrapper } from 'react-native-table-component';
 import {ExpandableListView} from 'react-native-expandable-listview';
+import { Table, TableWrapper, Row, Rows, Col, Cols, Cell } from 'react-native-reanimated-table';
 
 
 const RosterReqs = () => {

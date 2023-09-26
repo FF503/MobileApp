@@ -15,7 +15,8 @@ import {
   TextInput,
   ScrollView,
 } from 'react-native';
-import { Table, Row, Rows, Col, TableWrapper } from 'react-native-table-component';
+//import { Table, Row, Rows, Col, TableWrapper } from 'react-native-table-component';
+import { Table, TableWrapper, Row, Rows, Col, Cols, Cell } from 'react-native-reanimated-table';
 import ProgressCircle from 'react-native-progress-circle'
 
 //import {CameraKitCameraScreen} from 'react-native-camera-kit';
@@ -27,7 +28,7 @@ const AttendanceCode = () => {
   const [number, onChangeNumber] = useState('');
   const [data, setData] = useState({
     tableHead: ['Requirement', 'Goal', 'Attended', 'Possible', 'Percent', 'Status'],
-    tableTitle: ['Title', 'Title2', 'Title3', 'Title4', 'Title5', 'Title6', 'Title7'],
+    tableTitle: ['Team Meeting', 'FIRST Workshops', 'Community Outreach', 'Community Service', 'Off Season Competition', 'YPP Training', 'Saftey Training'],
     //flexArray: [75, 25, 55, 10, 90, 90, 75],
     flexArray: [1, 1, 1, 1, 1, 1, 1],
     flexArray2: [48, 13, 20, 20, 20, 50],
