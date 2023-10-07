@@ -22,26 +22,43 @@ import ProgressCircle from 'react-native-progress-circle'
 //import {CameraKitCameraScreen} from 'react-native-camera-kit';
 //import { CameraScreen } from 'react-native-camera-kit';
 
-const dropdownTitle = (props) => {
-  return (
-    <View>
-      <TouchableOpacity>
-        <View style={[{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }]}>
-          <Text style={styles.text}>{props}</Text>
-          <Image style={{ width: 15, height: 15, borderColor: 'black' }} source={require("../images/arrow.png")} />
-        </View>
-      </TouchableOpacity>
-    </View>
-  )
-}
-
 const AttendanceCode = () => {
+
+  const [button, setdb] = useState([false, false, false, false, false, false, false]);
+  //require("../images/arrow.png")
+  const dropdownTitle = (props, v) => {
+    return (
+      <SafeAreaView>
+        <View>
+          <TouchableOpacity
+            style={{}}
+            onPress={async () => {
+              let tempDb = button
+              console.log(button[0])
+              tempDb[0] = tempDb[0] ? false : true;
+              setdb(tempDb)
+              console.log("tempDb = " + tempDb)
+            }}
+          >
+            <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
+              <Text style={[styles.text, { width: '70%' }]}>{props}</Text>
+              {button[0] ? (<Image style={{ width: 15, height: 15, borderColor: 'black' }} source={require("../images/upArrow.png")} />
+              ) : (<View></View>)}
+              {button[0] ? (<View></View>
+              ) : (<Image style={{ width: 15, height: 15, borderColor: 'black' }} source={require("../images/arrow.png")} />)}
+            </View>
+          </TouchableOpacity>
+        </View>
+      </SafeAreaView>
+    )
+  }
+
   const [qrvalue, setQrvalue] = useState('');
   const [opneScanner, setOpneScanner] = useState(false);
   const [number, onChangeNumber] = useState('');
   const [data, setData] = useState({
     tableHead: ['Requirement', 'Goal', 'Attended', 'Possible', 'Percent', 'Status'],
-    tableTitle: [dropdownTitle('Team Meeting'), 'FIRST Workshops', 'Community Outreach', 'Community Service', 'Off Season Competition', 'YPP Training', 'Saftey Training'],
+    tableTitle: [dropdownTitle('Team Meeting', 0), dropdownTitle('FIRST \nWorkshops', 1), dropdownTitle('Community Outreach', 2), dropdownTitle('Community Service', 3), dropdownTitle('Off Season Competition', 4), dropdownTitle('YPP Training', 5), dropdownTitle('Saftey Training', 6)],
     //flexArray: [75, 25, 55, 10, 90, 90, 75],
     flexArray: [1, 1, 1, 1, 1, 1, 1],
     flexArray2: [48, 13, 20, 20, 20, 50],
@@ -55,7 +72,71 @@ const AttendanceCode = () => {
       ['1', '2', '3', '4', '5'],
       ['1', '2', '3', '4', '5'],
       ['1', '2', '3', '4', '5'],
-    ]
+    ],
+    tableData1: [
+      ['1', '2', '3', '4', '5'],
+      ['1', '2', '3', '4', '5'],
+      ['1', '2', '3', '4', '5'],
+      ['1', '2', '3', '4', '5'],
+      ['1', '2', '3', '4', '5'],
+      ['1', '2', '3', '4', '5'],
+      ['1', '2', '3', '4', '5'],
+    ],
+    tableData2: [
+      ['1', '2', '3', '4', '5'],
+      ['1', '2', '3', '4', '5'],
+      ['1', '2', '3', '4', '5'],
+      ['1', '2', '3', '4', '5'],
+      ['1', '2', '3', '4', '5'],
+      ['1', '2', '3', '4', '5'],
+      ['1', '2', '3', '4', '5'],
+    ],
+    tableData3: [
+      ['1', '2', '3', '4', '5'],
+      ['1', '2', '3', '4', '5'],
+      ['1', '2', '3', '4', '5'],
+      ['1', '2', '3', '4', '5'],
+      ['1', '2', '3', '4', '5'],
+      ['1', '2', '3', '4', '5'],
+      ['1', '2', '3', '4', '5'],
+    ],
+    tableData4: [
+      ['1', '2', '3', '4', '5'],
+      ['1', '2', '3', '4', '5'],
+      ['1', '2', '3', '4', '5'],
+      ['1', '2', '3', '4', '5'],
+      ['1', '2', '3', '4', '5'],
+      ['1', '2', '3', '4', '5'],
+      ['1', '2', '3', '4', '5'],
+    ],
+    tableData5: [
+      ['1', '2', '3', '4', '5'],
+      ['1', '2', '3', '4', '5'],
+      ['1', '2', '3', '4', '5'],
+      ['1', '2', '3', '4', '5'],
+      ['1', '2', '3', '4', '5'],
+      ['1', '2', '3', '4', '5'],
+      ['1', '2', '3', '4', '5'],
+    ],
+    tableData6: [
+      ['1', '2', '3', '4', '5'],
+      ['1', '2', '3', '4', '5'],
+      ['1', '2', '3', '4', '5'],
+      ['1', '2', '3', '4', '5'],
+      ['1', '2', '3', '4', '5'],
+      ['1', '2', '3', '4', '5'],
+      ['1', '2', '3', '4', '5'],
+    ],
+    tableData7: [
+      ['1', '2', '3', '4', '5'],
+      ['1', '2', '3', '4', '5'],
+      ['1', '2', '3', '4', '5'],
+      ['1', '2', '3', '4', '5'],
+      ['1', '2', '3', '4', '5'],
+      ['1', '2', '3', '4', '5'],
+      ['1', '2', '3', '4', '5'],
+    ],
+    tableTitle1: ["", "", "", "", "", "", ""],
   })
 
   const onOpenlink = () => {
@@ -122,21 +203,45 @@ const AttendanceCode = () => {
     <SafeAreaView style={{}}>
       {opneScanner ? (
         <View style={{ flex: 1 }}>
-          <CameraScreen
+          {/* <CameraScreen
             // Barcode props
             scanBarcode={true}
             onReadCode={(event) => onBarcodeScan(event.nativeEvent.codeStringValue)} // optional
             showFrame={true} // (default false) optional, show frame with transparent layer (qr code or barcode will be read on this area ONLY), start animation for scanner,that stoped when find any code. Frame always at center of the screen
             laserColor='red' // (default red) optional, color of laser in scanner frame
             frameColor='white' // (default white) optional, color of border of scanner frame
-          />
+          /> */}
+          <Text>Why did this work</Text>
         </View>
       ) : (
         <ScrollView>
+          <View>
+            <TouchableOpacity
+              style={{}}
+              onPress={async () => {
+                let tempDb = button
+                console.log(button[0])
+                tempDb[0] = tempDb[0] ? false : true;
+                setdb(tempDb)
+                console.log("tempDb = " + tempDb)
+              }}
+            >
+              <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
+                <Text style={[styles.text, { width: '70%' }]}>text</Text>
+                {button[0] ? (<Image style={{ width: 15, height: 15, borderColor: 'black' }} source={require("../images/upArrow.png")} />) :
+                  (<Image style={{ width: 15, height: 15, borderColor: 'black' }} source={require("../images/arrow.png")} />)}
+                {/* <Image style={{ width: 15, height: 15, borderColor: 'black' }} source={require("../images/arrow.png")} /> */}
+              </View>
+            </TouchableOpacity>
+          </View>
           <View style={{ flexDirection: 'column', margin: 10 }}>
             <View style={{ flexDirection: 'row', }}>
               <Text style={{ flex: 3.6, fontSize: 35, color: 'black' }}>Attendance</Text>
-              <TouchableOpacity style={{ flex: 1 }}>
+              <TouchableOpacity style={{ flex: 1 }}
+                onPress={async () => {
+                  setOpneScanner(true)
+                }}
+              >
                 <Image style={{ width: 50, height: 50 }} source={require("../images/cameraIconPink.png")} />
               </TouchableOpacity>
             </View>
@@ -179,10 +284,10 @@ const AttendanceCode = () => {
             <ScrollView horizontal={true}>
               <View>
                 <Table borderStyle={{ borderWidth: 1, borderColor: '' }}>
-                  <Row data={data.tableHead} style={[styles.head, { backgroundColor: 'pink' }]} height={40} widthArr={data.widthArray} textStyle={styles.text} />
+                  <Row data={data.tableHead} style={[styles.head, { backgroundColor: 'pink' }]} height={43} widthArr={data.widthArray} textStyle={styles.text} />
                   <TableWrapper style={styles.wrapper}>
-                    <Col data={data.tableTitle} style={styles.title} width={130} heightArr={[40, 40, 40, 40, 40, 40, 40]} textStyle={styles.text} />
-                    <Rows data={data.tableData} style={styles.row} height={40} widthArr={data.widthArray2} textStyle={styles.text} />
+                    <Col data={data.tableTitle} style={styles.title} width={130} heightArr={[43, 43, 43, 43, 43, 43, 43]} textStyle={styles.text} />
+                    <Rows data={data.tableData} style={styles.row} height={43} widthArr={data.widthArray2} textStyle={styles.text} />
                   </TableWrapper>
                 </Table>
 
