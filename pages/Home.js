@@ -5,22 +5,9 @@ import CalendarStrip from 'react-native-calendar-strip';
 import moment from 'moment';
 console.log("WE OPEN ")
 const Home =()=>{
-  const [selectedDate, setSelectedDate] = useState(new Date()); // Initialize with today's date
+// Initialize with today's date
 
-  const handleDateChange = (newDate) => {
-    // Update the selected date when it changes
-    setSelectedDate(newDate);
-  };
-  const handleLeftArrowPress = () => {
-    // Handle left arrow press
 
-    console.log('Left arrow pressed');
-  };
-
-    const handleRightArrowPress = () => {
-      // Handle right arrow press
-      console.log('Right arrow pressed');
-    };
     console.log(moment().date())
     day = moment().date()-1
     start1= moment().subtract(day,"days")
@@ -31,6 +18,52 @@ const Home =()=>{
     start4 = moment().add(21-day,"days")
     start5 = moment().add(28-day,"days")
     start6 = moment().add(35-day,"days")
+    const [fstart1, setFstart1] = useState(start1); 
+    const handleLeftArrowPress = () => {
+      // Handle left arrow press
+      console.log("")
+      console.log('Left arrow pressed');
+      console.log("")
+      console.log("initial Start1")
+      console.log(start1)
+      console.log(fstart1)
+      start1 = fstart1
+      start1.subtract(1,"months")
+      start2 = start2.subtract(1,"months")
+      start3 = start3.subtract(1,"months")
+      start4 = start4.subtract(1,"months")
+      start5 = start5.subtract(1,"months")
+      start6 = start6.subtract(1,"months")
+      console.log("")
+      console.log("Final start1's");
+      console.log(start1)
+      setFstart1(start1)
+      console.log(fstart1);
+      console.log("")
+    };
+  
+      const handleRightArrowPress = () => {
+        // Handle right arrow press
+        console.log("")
+        console.log('Right arrow pressed');
+        console.log("")
+        console.log("initial Start1");
+        console.log(start1);
+      console.log(fstart1);
+      start1 = fstart1
+        start1 = start1.add(1,"months");
+        start2 = start2.add(1,"months");
+        start3 = start3.add(1,"months");
+        start4 = start4.add(1,"months");
+        start5 = start5.add(1,"months");
+        start6 = start6.add(1,"months");
+        console.log("")
+        console.log("Final start1's");
+        console.log(start1);
+        setFstart1(start1);
+        console.log(fstart1);
+        console.log("")
+      };  
     // console.log("moment: ")
     // console.log(moment())
     // console.log("Start1: ")
@@ -61,6 +94,7 @@ const Home =()=>{
       ];
       start = "2023-10-25T19:34:24.526Z"
       //moment().add(7,"days")
+    
     return(
         <View>
             {/* <Headers centerComponent ={{text: "Home", style: {color: "#fff"}}}/> */}
@@ -76,16 +110,23 @@ const Home =()=>{
     </View>
     <View style={styles.container}>
       <View style= {{flex: 1}}>
-    <TouchableOpacity onPress={handleLeftArrowPress} style={styles.leftArrow}>
+    <TouchableOpacity onPress={()=>{
+      handleLeftArrowPress()
+      setFstart1(start1)
+      console.log("\n fStart 1:")
+      console.log(fstart1)
+    }
+       } style={styles.leftArrow}>
 
       
       </TouchableOpacity>
       </View>
       <View style= {styles.container1}>
+        
     <CalendarStrip
         
       style={{height:150, marginTop: 20}}
-      startingDate={start1}
+      startingDate={fstart1}
       leftSelector={[]} // Remove the left arrow
       rightSelector={[]}
       
@@ -146,7 +187,13 @@ const Home =()=>{
       //   datesBlacklist={datesBlacklistFunc}
       /></View>
       <View style= {{flex: 1}}>
-      <TouchableOpacity onPress={handleRightArrowPress} style={styles.rightArrow}>
+      <TouchableOpacity onPress={()=>{
+          handleRightArrowPress()
+          setFstart1(start1)
+          console.log("\n fStart 1:")
+          console.log(fstart1)
+        }
+        } style={styles.rightArrow}>
       </TouchableOpacity>
   </View>
   </View>
