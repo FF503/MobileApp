@@ -18,14 +18,16 @@ import {
 //import { Table, Row, Rows, Col, TableWrapper } from 'react-native-table-component';
 import { Table, TableWrapper, Row, Rows, Col, Cols, Cell } from 'react-native-reanimated-table';
 import ProgressCircle from 'react-native-progress-circle'
+//import DataTable from 'react-data-table-component';
 
 //import {CameraKitCameraScreen} from 'react-native-camera-kit';
 //import { CameraScreen } from 'react-native-camera-kit';
 
 const AttendanceCode = () => {
 
-  const [button, setdb] = useState([false, false, false, false, false, false, false]);
-  //require("../images/arrow.png")
+  const [button, setdb] = useState([0, 0, 0, 0, 0, 0, 0]);
+  const [b1, setB1] = useState(1);
+   //require("../images/arrow.png")
   const dropdownTitle = (props, v) => {
     return (
       <SafeAreaView>
@@ -33,19 +35,15 @@ const AttendanceCode = () => {
           <TouchableOpacity
             style={{}}
             onPress={async () => {
-              let tempDb = button
-              console.log(button[0])
-              tempDb[0] = tempDb[0] ? false : true;
-              setdb(tempDb)
-              console.log("tempDb = " + tempDb)
+              
+              setB1(b1 == 0 ? 1 : 0)
             }}
           >
             <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
-              <Text style={[styles.text, { width: '70%' }]}>{props}</Text>
-              {button[0] ? (<Image style={{ width: 15, height: 15, borderColor: 'black' }} source={require("../images/upArrow.png")} />
-              ) : (<View></View>)}
-              {button[0] ? (<View></View>
-              ) : (<Image style={{ width: 15, height: 15, borderColor: 'black' }} source={require("../images/arrow.png")} />)}
+              <Text style={[styles.text, { width: '70%' }]}>text</Text>
+              {b1 == 0 ? (<Image style={{ width: 15, height: 15, borderColor: 'black' }} source={require("../images/upArrow.png")} />) :
+                (<Image style={{ width: 15, height: 15, borderColor: 'black' }} source={require("../images/arrow.png")} />)}
+              {/* <Image style={{ width: 15, height: 15, borderColor: 'black' }} source={require("../images/arrow.png")} /> */}
             </View>
           </TouchableOpacity>
         </View>
@@ -198,104 +196,112 @@ const AttendanceCode = () => {
       setOpneScanner(true);
     }
   };
-
+  const [test, setTest] = useState(1);
   return (
     <SafeAreaView style={{}}>
-      {opneScanner ? (
+      <TouchableOpacity
+        style={{}}
+        onPress={() => {
+          // let tempDb = button
+          // console.log(button[0])
+          // tempDb[0] = tempDb[0] ? false : true;
+          // setdb(tempDb)
+          // console.log("tempDb = " + tempDb)
+          setTest(test == 0 ? 1 : 0)
+        }}
+      >
+        <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
+          <Text style={[styles.text, { width: '70%' }]}>text</Text>
+          {test == 0 ? (<Image style={{ width: 15, height: 15, borderColor: 'black' }} source={require("../images/upArrow.png")} />) :
+            (<Image style={{ width: 15, height: 15, borderColor: 'black' }} source={require("../images/arrow.png")} />)}
+          {/* <Image style={{ width: 15, height: 15, borderColor: 'black' }} source={require("../images/arrow.png")} /> */}
+        </View>
+      </TouchableOpacity>
+      {/* {opneScanner ? (
         <View style={{ flex: 1 }}>
-          {/* <CameraScreen
+          <CameraScreen
             // Barcode props
             scanBarcode={true}
             onReadCode={(event) => onBarcodeScan(event.nativeEvent.codeStringValue)} // optional
             showFrame={true} // (default false) optional, show frame with transparent layer (qr code or barcode will be read on this area ONLY), start animation for scanner,that stoped when find any code. Frame always at center of the screen
             laserColor='red' // (default red) optional, color of laser in scanner frame
             frameColor='white' // (default white) optional, color of border of scanner frame
-          /> */}
+          />
           <Text>Why did this work</Text>
         </View>
-      ) : (
-        <ScrollView>
-          <View>
-            <TouchableOpacity
-              style={{}}
+      ) : ( */}
+      <ScrollView>
+        <View>
+
+        </View>
+        <View style={{ flexDirection: 'column', margin: 10 }}>
+          <View style={{ flexDirection: 'row', }}>
+            <Text style={{ flex: 3.6, fontSize: 35, color: 'black' }}>Attendance</Text>
+            <TouchableOpacity style={{ flex: 1 }}
               onPress={async () => {
-                let tempDb = button
-                console.log(button[0])
-                tempDb[0] = tempDb[0] ? false : true;
-                setdb(tempDb)
-                console.log("tempDb = " + tempDb)
+                setOpneScanner(true)
               }}
             >
-              <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
-                <Text style={[styles.text, { width: '70%' }]}>text</Text>
-                {button[0] ? (<Image style={{ width: 15, height: 15, borderColor: 'black' }} source={require("../images/upArrow.png")} />) :
-                  (<Image style={{ width: 15, height: 15, borderColor: 'black' }} source={require("../images/arrow.png")} />)}
-                {/* <Image style={{ width: 15, height: 15, borderColor: 'black' }} source={require("../images/arrow.png")} /> */}
-              </View>
+              <Image style={{ width: 50, height: 50 }} source={require("../images/cameraIconPink.png")} />
             </TouchableOpacity>
           </View>
-          <View style={{ flexDirection: 'column', margin: 10 }}>
-            <View style={{ flexDirection: 'row', }}>
-              <Text style={{ flex: 3.6, fontSize: 35, color: 'black' }}>Attendance</Text>
-              <TouchableOpacity style={{ flex: 1 }}
-                onPress={async () => {
-                  setOpneScanner(true)
-                }}
-              >
-                <Image style={{ width: 50, height: 50 }} source={require("../images/cameraIconPink.png")} />
-              </TouchableOpacity>
-            </View>
-            <View style={{ height: 10 }}></View>
-            <View style={{ flexDirection: 'row', }}>
-              <TextInput
-                style={[styles.input, { flex: 2 }]}
-                onChangeText={onChangeNumber}
-                value={number}
-                placeholder="useless placeholder"
-                keyboardType="numeric"
-              />
-              <View style={{ flex: 0.5 }}></View>
-              <TouchableOpacity style={{ flex: 1, borderWidth: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: 'pink' }}>
-                <Text style={{ color: 'black', fontSize: 20 }}>Submit</Text>
-              </TouchableOpacity>
-            </View>
-            <View style={{ height: 10 }}></View>
-            <Text style={{ fontSize: 35, color: 'black' }}>Roster Requirements</Text>
-            <View style={{ flexDirection: 'row', }}>
-              <Text style={{ fontWeight: 'bold', fontSize: 20, color: 'black' }}>Name: </Text>
-              <Text style={{ fontSize: 20, color: 'black' }}>Anish Manda</Text>
-            </View>
-            <View style={{ flexDirection: 'row', }}>
-              <Text style={{ fontWeight: 'bold', fontSize: 20, color: 'black' }}>Assigned Group: </Text>
-              <Text style={{ fontSize: 20, color: 'black' }}>Quit Robotics I think</Text>
-            </View>
-            <View style={{ height: 10 }}></View>
-            <View style={styles.circle}>
-              <ProgressCircle
-                percent={48}
-                radius={100}
-                borderWidth={8}
-                color="#3399FF"
-                shadowColor="#999"
-                bgColor="#fff">
-                <Text style={{ fontSize: 22, color: 'black' }}>{'48% Complete'}</Text>
-              </ProgressCircle>
-            </View>
-            <ScrollView horizontal={true}>
-              <View>
-                <Table borderStyle={{ borderWidth: 1, borderColor: '' }}>
-                  <Row data={data.tableHead} style={[styles.head, { backgroundColor: 'pink' }]} height={43} widthArr={data.widthArray} textStyle={styles.text} />
-                  <TableWrapper style={styles.wrapper}>
-                    <Col data={data.tableTitle} style={styles.title} width={130} heightArr={[43, 43, 43, 43, 43, 43, 43]} textStyle={styles.text} />
-                    <Rows data={data.tableData} style={styles.row} height={43} widthArr={data.widthArray2} textStyle={styles.text} />
-                  </TableWrapper>
-                </Table>
-
-              </View>
-            </ScrollView>
+          <View style={{ height: 10 }}></View>
+          <View style={{ flexDirection: 'row', }}>
+            <TextInput
+              style={[styles.input, { flex: 2 }]}
+              onChangeText={onChangeNumber}
+              value={number}
+              placeholder="useless placeholder"
+              keyboardType="numeric"
+            />
+            <View style={{ flex: 0.5 }}></View>
+            <TouchableOpacity style={{ flex: 1, borderWidth: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: 'pink' }}>
+              <Text style={{ color: 'black', fontSize: 20 }}>Submit</Text>
+            </TouchableOpacity>
           </View>
-        </ScrollView>
-      )}
+          <View style={{ height: 10 }}></View>
+          <Text style={{ fontSize: 35, color: 'black' }}>Roster Requirements</Text>
+          <View style={{ flexDirection: 'row', }}>
+            <Text style={{ fontWeight: 'bold', fontSize: 20, color: 'black' }}>Name: </Text>
+            <Text style={{ fontSize: 20, color: 'black' }}>Anish Manda</Text>
+          </View>
+          <View style={{ flexDirection: 'row', }}>
+            <Text style={{ fontWeight: 'bold', fontSize: 20, color: 'black' }}>Assigned Group: </Text>
+            <Text style={{ fontSize: 20, color: 'black' }}>Quit Robotics I think</Text>
+          </View>
+          <View style={{ height: 10 }}></View>
+          <View style={styles.circle}>
+            <ProgressCircle
+              percent={48}
+              radius={100}
+              borderWidth={8}
+              color="#3399FF"
+              shadowColor="#999"
+              bgColor="#fff">
+              <Text style={{ fontSize: 22, color: 'black' }}>{'48% Complete'}</Text>
+            </ProgressCircle>
+          </View>
+          <ScrollView horizontal={true}>
+            <View>
+              <Table borderStyle={{ borderWidth: 1, borderColor: '' }}>
+                <Row data={data.tableHead} style={[styles.head, { backgroundColor: 'pink' }]} height={43} widthArr={data.widthArray} textStyle={styles.text} />
+                <TableWrapper style={styles.wrapper}>
+                  <Col data={data.tableTitle} style={styles.title} width={130} heightArr={[43, 43, 43, 43, 43, 43, 43]} textStyle={styles.text} />
+                  <Rows data={data.tableData} style={styles.row} height={43} widthArr={data.widthArray2} textStyle={styles.text} />
+                </TableWrapper>
+              </Table>
+
+            </View>
+          </ScrollView>
+          {/* <DataTable
+              columns={columns}
+              data={data}
+              expandableRows
+              expandableRowsComponent={ExpandedComponent}
+            /> */}
+        </View>
+      </ScrollView>
+      {/* )} */}
     </SafeAreaView>
   );
 };
