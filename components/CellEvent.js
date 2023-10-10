@@ -1,6 +1,6 @@
 import React from 'react';
 import ScrollPicker from "react-native-wheel-scrollview-picker";
-import { Stylesheet, Text, View, TextInput, StyleSheet, Image, TouchableOpacity } from 'react-native';
+import { Stylesheet, Text, View, TextInput, StyleSheet, Image, TouchableOpacity, Modal } from 'react-native';
 import { Dropdown } from 'react-native-element-dropdown';
 import CalendarPicker from 'react-native-calendar-picker';
 
@@ -54,23 +54,38 @@ export default function CellEvent({ detail, prop }) {
             </View>
 
     } else if (prop == 'calander') {
+
+        const [showModal, setShowModal] = React.useState(false);
+
         comp =
-            <View style={styles.input2}>
-                <View style={styles.input3}>
-                    <View style={styles.calTextView}>
+            <View style={styles.calanderView}>
+                <TouchableOpacity onPress={() => setShowModal(true)} style={styles.input2}>
+                </TouchableOpacity>
+                <Modal visible={showModal} transparent={true}>
+                    <View style={{}}>
+                        <View style={{ height: '50%' }}></View>
+                        <View style={{ backgroundColor: 'white' }}>
+                            <CalendarPicker style={{ margin: 40, elevation: 4, borderRadius: 10, height: '50%' }} />
+                        </View>
                     </View>
-                    <TouchableOpacity activeOpacity={1} style={styles.calIconView}>
-                        <Image style={styles.calIcon} source={require("../images/calanderIcon.png")} />
-                    </TouchableOpacity>
-                </View>
-                <View style={styles.input4}>
-                    <View style={styles.calTextView}>
-                    </View>
-                    <TouchableOpacity activeOpacity={1} style={styles.calIconView}>
-                        <Image style={styles.calIcon} source={require("../images/calanderIcon.png")} />
-                    </TouchableOpacity>
-                </View>
+                </Modal>
             </View>
+
+        {/* <View style={styles.input3}>
+                    <View style={styles.calTextView}>
+                    </View>
+                    <TouchableOpacity activeOpacity={1} style={styles.calIconView}>
+                        <Image style={styles.calIcon} source={require("../images/calanderIcon.png")} />
+                    </TouchableOpacity>
+                </View> */}
+        {/* <View style={styles.input4}>
+                    <View style={styles.calTextView}>
+                    </View>
+                    <TouchableOpacity activeOpacity={1} style={styles.calIconView}>
+                        <Image style={styles.calIcon} source={require("../images/calanderIcon.png")} />
+                    </TouchableOpacity>
+                </View> */}
+
 
     } else if (prop == 'dropdown') {
         comp =
@@ -108,7 +123,7 @@ const styles = StyleSheet.create({
         marginTop: 5,
         borderRadius: 10,
         backgroundColor: '#303030',
-        flexDirection: 'row', 
+        flexDirection: 'row',
     },
 
     detailText: {
@@ -129,8 +144,8 @@ const styles = StyleSheet.create({
         borderColor: '#525252',
         paddingLeft: 10,
         color: 'white',
-        textAlign: 'center', 
-        alignItems: 'center', 
+        textAlign: 'center',
+        alignItems: 'center',
         justifyContent: 'center',
     },
 
@@ -140,30 +155,42 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderRadius: 10,
         borderWidth: 1,
-        borderColor: '#525252',
-        alignItems: 'center', 
-        flexDirection: 'column', 
-        alignItems: 'center', 
+        borderColor: 'white',
+        alignItems: 'center',
+        flexDirection: 'column',
+        alignItems: 'center',
+        zIndex: 0,
+        elevation: 0
     },
 
     input3: {
-        height: '100%', 
-        alignSelf: 'center', 
+        height: '100%',
+        alignSelf: 'center',
         width: '100%',
         flexDirection: 'row',
-        borderWidth: 1, 
-        borderColor: 'white', 
+        borderWidth: 1,
+        borderColor: 'white',
+        zIndex: 1,
+        elevation: 1,
+        borderRadius: 10,
     },
 
     input4: {
-        transform: [{translateY: 0}],
-        height: '100%', 
-        alignSelf: 'center', 
+        height: '100%',
+        alignSelf: 'center',
         width: '100%',
         flexDirection: 'row',
-        borderWidth: 1, 
-        borderColor: 'white', 
-        backgroundColor: 'white'
+        borderWidth: 1,
+        borderColor: 'white',
+        backgroundColor: 'white',
+        zIndex: 2,
+        elevation: 2
+    },
+
+    calanderButton: {
+        width: '100%',
+        height: '100%',
+        borderColor: 'blue'
     },
 
     scrollViewPick: {
@@ -200,9 +227,9 @@ const styles = StyleSheet.create({
         textAlign: 'center'
     },
 
-    calTextView: {
+    calanderButton: {
         height: '100%',
-        width: '80%',
+        width: '100%',
         // borderWidth: 0.5, 
         // borderColor: 'black'
     },
@@ -213,9 +240,13 @@ const styles = StyleSheet.create({
         vIndex: 5
     },
 
+    calanderView: {
+        width: '100%'
+    },
+
     calIcon: {
         height: '100%',
-        width: '100%', 
+        width: '100%',
     }
 })
 
