@@ -259,7 +259,7 @@ const AttendanceCode = () => {
                   <Col data={data.tableTitle[0]} style={styles.title} width={130} heightArr={[43, 43, 43, 43, 43, 43, 43]} textStyle={styles.text} />
                   <Rows data={data.tableData} style={styles.row} height={43} widthArr={data.widthArray2} textStyle={styles.text} />
                 </TableWrapper>
-                <Rows data={data.tableData1} style={styles.row} height={43} widthArr={data.widthArray} textStyle={styles.text} />
+                <Rows data={data.tableData1} style={[styles.row, { backgroundColor: 'lightgrey'}]} height={43} widthArr={data.widthArray} textStyle={styles.text} />
                 {/* <TableWrapper style={styles.wrapper}>
                   <Col data={data.tableTitle} style={styles.title} width={130} heightArr={[43, 43, 43, 43, 43, 43, 43]} textStyle={styles.text} />
                   <Rows data={data.tableData} style={styles.row} height={43} widthArr={data.widthArray2} textStyle={styles.text} />
