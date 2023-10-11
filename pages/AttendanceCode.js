@@ -27,7 +27,7 @@ const AttendanceCode = () => {
 
   const [button, setdb] = useState([0, 0, 0, 0, 0, 0, 0]);
   const [b1, setB1] = useState(1);
-   //require("../images/arrow.png")
+  //require("../images/arrow.png")
   const dropdownTitle = (props, v) => {
     return (
       <SafeAreaView>
@@ -35,15 +35,18 @@ const AttendanceCode = () => {
           <TouchableOpacity
             style={{}}
             onPress={async () => {
-              
-              setB1(b1 == 0 ? 1 : 0)
+              let temp = b1
+              if (temp[v] == 0) {
+                temp[v] = 1
+              } else {
+                temp[v] = 0
+              }
+              setB1(temp)
+              console.log(temp)
             }}
           >
             <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
-              <Text style={[styles.text, { width: '70%' }]}>text</Text>
-              {b1 == 0 ? (<Image style={{ width: 15, height: 15, borderColor: 'black' }} source={require("../images/upArrow.png")} />) :
-                (<Image style={{ width: 15, height: 15, borderColor: 'black' }} source={require("../images/arrow.png")} />)}
-              {/* <Image style={{ width: 15, height: 15, borderColor: 'black' }} source={require("../images/arrow.png")} /> */}
+              <Text style={[styles.text, { width: '90%', color: 'black', fontWeight: 'bold' }]}>{props}</Text>
             </View>
           </TouchableOpacity>
         </View>
@@ -56,83 +59,49 @@ const AttendanceCode = () => {
   const [number, onChangeNumber] = useState('');
   const [data, setData] = useState({
     tableHead: ['Requirement', 'Goal', 'Attended', 'Possible', 'Percent', 'Status'],
-    tableTitle: [dropdownTitle('Team Meeting', 0), dropdownTitle('FIRST \nWorkshops', 1), dropdownTitle('Community Outreach', 2), dropdownTitle('Community Service', 3), dropdownTitle('Off Season Competition', 4), dropdownTitle('YPP Training', 5), dropdownTitle('Saftey Training', 6)],
+    tableTitle: [[dropdownTitle('Team Meeting', 0)], [dropdownTitle('FIRST \nWorkshops', 1)], [dropdownTitle('Community Outreach', 2)], [dropdownTitle('Community Service', 3)], [dropdownTitle('Off Season Competition', 4)], [dropdownTitle('YPP Training', 5)], [dropdownTitle('Saftey Training', 6)]],
     //flexArray: [75, 25, 55, 10, 90, 90, 75],
     flexArray: [1, 1, 1, 1, 1, 1, 1],
     flexArray2: [48, 13, 20, 20, 20, 50],
-    widthArray: [130, 80, 80, 80, 90, 85,],
+    widthArray: [130, 90, 90, 90, 100, 90,],
     widthArray2: [80, 80, 80, 90, 85,],
     tableData: [
       ['1', '2', '3', '4', '5'],
-      ['1', '2', '3', '4', '5'],
-      ['1', '2', '3', '4', '5'],
-      ['1', '2', '3', '4', '5'],
-      ['1', '2', '3', '4', '5'],
-      ['1', '2', '3', '4', '5'],
-      ['1', '2', '3', '4', '5'],
     ],
     tableData1: [
-      ['1', '2', '3', '4', '5'],
-      ['1', '2', '3', '4', '5'],
-      ['1', '2', '3', '4', '5'],
-      ['1', '2', '3', '4', '5'],
-      ['1', '2', '3', '4', '5'],
-      ['1', '2', '3', '4', '5'],
-      ['1', '2', '3', '4', '5'],
+      ['', 'Event Date', 'Event Title', 'Cutoff Time', 'Checkin Time', 'Attended'],
+      ['', '1', '2', '3', '4', '5'],
+      ['', '1', '2', '3', '4', '5'],
     ],
     tableData2: [
-      ['1', '2', '3', '4', '5'],
-      ['1', '2', '3', '4', '5'],
-      ['1', '2', '3', '4', '5'],
-      ['1', '2', '3', '4', '5'],
-      ['1', '2', '3', '4', '5'],
-      ['1', '2', '3', '4', '5'],
-      ['1', '2', '3', '4', '5'],
+      ['', '1', '2', '3', '4', '5'],
+      ['', '1', '2', '3', '4', '5'],
+      ['', '1', '2', '3', '4', '5'],
     ],
     tableData3: [
-      ['1', '2', '3', '4', '5'],
-      ['1', '2', '3', '4', '5'],
-      ['1', '2', '3', '4', '5'],
-      ['1', '2', '3', '4', '5'],
-      ['1', '2', '3', '4', '5'],
-      ['1', '2', '3', '4', '5'],
-      ['1', '2', '3', '4', '5'],
+      ['', '1', '2', '3', '4', '5'],
+      ['', '1', '2', '3', '4', '5'],
+      ['', '1', '2', '3', '4', '5'],
     ],
     tableData4: [
-      ['1', '2', '3', '4', '5'],
-      ['1', '2', '3', '4', '5'],
-      ['1', '2', '3', '4', '5'],
-      ['1', '2', '3', '4', '5'],
-      ['1', '2', '3', '4', '5'],
-      ['1', '2', '3', '4', '5'],
-      ['1', '2', '3', '4', '5'],
+      ['', '1', '2', '3', '4', '5'],
+      ['', '1', '2', '3', '4', '5'],
+      ['', '1', '2', '3', '4', '5'],
     ],
     tableData5: [
-      ['1', '2', '3', '4', '5'],
-      ['1', '2', '3', '4', '5'],
-      ['1', '2', '3', '4', '5'],
-      ['1', '2', '3', '4', '5'],
-      ['1', '2', '3', '4', '5'],
-      ['1', '2', '3', '4', '5'],
-      ['1', '2', '3', '4', '5'],
+      ['', '1', '2', '3', '4', '5'],
+      ['', '1', '2', '3', '4', '5'],
+      ['', '1', '2', '3', '4', '5'],
     ],
     tableData6: [
-      ['1', '2', '3', '4', '5'],
-      ['1', '2', '3', '4', '5'],
-      ['1', '2', '3', '4', '5'],
-      ['1', '2', '3', '4', '5'],
-      ['1', '2', '3', '4', '5'],
-      ['1', '2', '3', '4', '5'],
-      ['1', '2', '3', '4', '5'],
+      ['', '1', '2', '3', '4', '5'],
+      ['', '1', '2', '3', '4', '5'],
+      ['', '1', '2', '3', '4', '5'],
     ],
     tableData7: [
-      ['1', '2', '3', '4', '5'],
-      ['1', '2', '3', '4', '5'],
-      ['1', '2', '3', '4', '5'],
-      ['1', '2', '3', '4', '5'],
-      ['1', '2', '3', '4', '5'],
-      ['1', '2', '3', '4', '5'],
-      ['1', '2', '3', '4', '5'],
+      ['', '1', '2', '3', '4', '5'],
+      ['', '1', '2', '3', '4', '5'],
+      ['', '1', '2', '3', '4', '5'],
     ],
     tableTitle1: ["", "", "", "", "", "", ""],
   })
@@ -165,6 +134,24 @@ const AttendanceCode = () => {
     );
   };
 
+  // <TouchableOpacity
+  //       style={{}}
+  //       onPress={() => {
+  //         let tempDb = button
+  //         console.log(button[0])
+  //         tempDb[0] = tempDb[0] ? false : true;
+  //         setdb(tempDb)
+  //         console.log("tempDb = " + tempDb)
+  //         setTest(test == 0 ? 1 : 0)
+  //       }}
+  //     >
+  //       <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
+  //         <Text style={[styles.text, { width: '70%' }]}>text</Text>
+  //         {test == 0 ? (<Image style={{ width: 15, height: 15, borderColor: 'black' }} source={require("../images/upArrow.png")} />) :
+  //           (<Image style={{ width: 15, height: 15, borderColor: 'black' }} source={require("../images/arrow.png")} />)}
+  //         {/* <Image style={{ width: 15, height: 15, borderColor: 'black' }} source={require("../images/arrow.png")} /> */}
+  //       </View>
+  //     </TouchableOpacity>
   const onOpneScanner = () => {
     // To Start Scanning
     if (Platform.OS === 'android') {
@@ -196,27 +183,10 @@ const AttendanceCode = () => {
       setOpneScanner(true);
     }
   };
-  const [test, setTest] = useState(1);
+  // const [test, setTest] = useState(1);
   return (
     <SafeAreaView style={{}}>
-      <TouchableOpacity
-        style={{}}
-        onPress={() => {
-          // let tempDb = button
-          // console.log(button[0])
-          // tempDb[0] = tempDb[0] ? false : true;
-          // setdb(tempDb)
-          // console.log("tempDb = " + tempDb)
-          setTest(test == 0 ? 1 : 0)
-        }}
-      >
-        <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
-          <Text style={[styles.text, { width: '70%' }]}>text</Text>
-          {test == 0 ? (<Image style={{ width: 15, height: 15, borderColor: 'black' }} source={require("../images/upArrow.png")} />) :
-            (<Image style={{ width: 15, height: 15, borderColor: 'black' }} source={require("../images/arrow.png")} />)}
-          {/* <Image style={{ width: 15, height: 15, borderColor: 'black' }} source={require("../images/arrow.png")} /> */}
-        </View>
-      </TouchableOpacity>
+
       {/* {opneScanner ? (
         <View style={{ flex: 1 }}>
           <CameraScreen
@@ -286,9 +256,14 @@ const AttendanceCode = () => {
               <Table borderStyle={{ borderWidth: 1, borderColor: '' }}>
                 <Row data={data.tableHead} style={[styles.head, { backgroundColor: 'pink' }]} height={43} widthArr={data.widthArray} textStyle={styles.text} />
                 <TableWrapper style={styles.wrapper}>
-                  <Col data={data.tableTitle} style={styles.title} width={130} heightArr={[43, 43, 43, 43, 43, 43, 43]} textStyle={styles.text} />
+                  <Col data={data.tableTitle[0]} style={styles.title} width={130} heightArr={[43, 43, 43, 43, 43, 43, 43]} textStyle={styles.text} />
                   <Rows data={data.tableData} style={styles.row} height={43} widthArr={data.widthArray2} textStyle={styles.text} />
                 </TableWrapper>
+                <Rows data={data.tableData1} style={styles.row} height={43} widthArr={data.widthArray} textStyle={styles.text} />
+                {/* <TableWrapper style={styles.wrapper}>
+                  <Col data={data.tableTitle} style={styles.title} width={130} heightArr={[43, 43, 43, 43, 43, 43, 43]} textStyle={styles.text} />
+                  <Rows data={data.tableData} style={styles.row} height={43} widthArr={data.widthArray2} textStyle={styles.text} />
+                </TableWrapper> */}
               </Table>
 
             </View>
