@@ -1,9 +1,12 @@
-import React from 'react';
-import {View} from 'react-native';
-import Shop from './pages/Shop';
+import React from 'react'
+import {View} from 'react-native'
 
 const App = () => {
-  return <Shop />;
-};
+  return(
+    <View>
+
+    </View>
+  )
+}
 
 export default App;
