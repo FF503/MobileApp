@@ -8,12 +8,18 @@ export default function CellEvent({ detail, prop }) {
 
     const [text, onChangeText] = React.useState('Useless Text');
     const [number, onChangeNumber] = React.useState.apply('');
+    const [textDate, setTextDate] = React.useState('')
+    const [currentDate, setCurrentDate] = React.useState("")
 
     const [index, setIndex] = React.useState(0);
     const ref = React.useRef();
     const onValueChange = (data, selectedIndex) => {
         setIndex(selectedIndex);
     };
+
+    function onDateChange(date) {
+        setCurrentDate(date)
+      }
 
     const dropdownData = [
         { label: "Team Meeting", value: 1 },
@@ -60,12 +66,25 @@ export default function CellEvent({ detail, prop }) {
         comp =
             <View style={styles.calanderView}>
                 <TouchableOpacity onPress={() => setShowModal(true)} style={styles.input2}>
+                    <Text> {currentDate.toString()} </Text>
                 </TouchableOpacity>
                 <Modal visible={showModal} transparent={true}>
                     <View style={{}}>
                         <View style={{ height: '50%' }}></View>
-                        <View style={{ backgroundColor: 'white' }}>
-                            <CalendarPicker style={{ margin: 40, elevation: 4, borderRadius: 10, height: '50%' }} />
+                        <View style={{ height: '50%', backgroundColor: 'white', flexDirection: 'column' }}>
+                            <View style={{ backgroundColor: 'white', height: '90%', borderColor: 'black', borderWidth: 1 }}>
+                                <CalendarPicker
+                                    style={{ margin: 40, elevation: 4, borderRadius: 10, height: '50%' }}
+                                    todayBackgroundColor="#f2e6ff"
+                                    selectedDayColor="#7300e6"
+                                    selectedDayTextColor="#FFFFFF"
+                                    onDateChange={onDateChange} 
+                                />
+                            </View>
+                            <View style={{ flexDirection: 'row', height: '10%' }}>
+                                <TouchableOpacity onPress={() => setShowModal(false)} activeOpacity={1.0} style={styles.closeButton}><Text>Close</Text></TouchableOpacity>
+                                <TouchableOpacity activeOpacity={1.0} style={styles.openButton}><Text>Select</Text></TouchableOpacity>
+                            </View>
                         </View>
                     </View>
                 </Modal>
@@ -155,12 +174,12 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderRadius: 10,
         borderWidth: 1,
-        borderColor: 'white',
+        borderColor: '#525252',
         alignItems: 'center',
         flexDirection: 'column',
         alignItems: 'center',
         zIndex: 0,
-        elevation: 0
+        elevation: 0,
     },
 
     input3: {
@@ -247,6 +266,22 @@ const styles = StyleSheet.create({
     calIcon: {
         height: '100%',
         width: '100%',
+    },
+
+    openButton: {
+        width: '50%',
+        backgroundColor: 'lime',
+        alignItems: 'center',
+        justifyContent: 'center',
+        textAlign: 'center'
+    },
+
+    closeButton: {
+        width: '50%',
+        backgroundColor: 'red',
+        textAlign: 'center',
+        alignItems: 'center',
+        justifyContent: 'center',
     }
 })
 
