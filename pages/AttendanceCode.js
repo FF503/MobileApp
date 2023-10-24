@@ -30,7 +30,7 @@ const AttendanceCode = () => {
   const [button, setdb] = useState([0, 0, 0, 0, 0, 0, 0]);
   const [b1, setB1] = useState(1);
   //require("../images/arrow.png")
-  const dropdownTitle = (props, v) => {
+  const dropdownTitle = (props) => {
     return (
       <SafeAreaView>
         <View>
@@ -132,14 +132,14 @@ const AttendanceCode = () => {
     {
       section: [
         {
-          tableHead: ['', 'Requirement', 'Goal', 'Attended', 'Possible', 'Percent', 'Status'],
-          tableData: [['1', '2', '1', '2','1', '2'], ['1', '2', '1', '2','1', '2'], ['1', '2', '1', '2','1', '2'], ['1', '2', '1', '2','1', '2']],
-          tableTitle: ['Team Meeting']
+          tableTitle: ['Team Meeting'],
+          tableHead: [['Requirement', 'Goal', 'Attended', 'Possible', 'Percent', 'Status']],
+          tableData: [['1', '2', '1', '2', '1', '2'], ['1', '2', '1', '2', '1', '2'], ['1', '2', '1', '2', '1', '2'], ['1', '2', '1', '2', '1', '2']],
         },
         {
-          tableHead: ['', 'Requirement', 'Goal', 'Attended', 'Possible', 'Percent', 'Status'],
-          tableData: [['1', '2', '1', '2','1', '2'], ['1', '2', '1', '2','1', '2'], ['1', '2', '1', '2','1', '2'], ['1', '2', '1', '2','1', '2']],
-          tableTitle: ['Outreach']
+          tableTitle: ['Community Outreach'],
+          tableHead: [['Requirement', 'Goal', 'Attended', 'Possible', 'Percent', 'Status']],
+          tableData: [['1', '2', '1', '2', '1', '2'], ['1', '2', '1', '2', '1', '2'], ['1', '2', '1', '2', '1', '2'], ['1', '2', '1', '2', '1', '2']],
         },
       ]
     }
@@ -153,24 +153,32 @@ const AttendanceCode = () => {
     return (
       <View style={styles.header}>
         <View>
-
+          <View style={{}}>
+            <Table borderStyle={{ borderWidth: 2, borderColor: '#c8e1ff' }}>
+              <TableWrapper style={{ flexDirection: 'row' }}>
+                <Col data={[(
+                  <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
+                    <Text style={[styles.text, {fontWeight: 'bold'}]}>{section.tableTitle}</Text>
+                    <Image
+                      style={{ height: 25, width: 25 }}
+                      source={
+                        currentObj == section
+                          ? {
+                            uri:
+                              'https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-ios7-arrow-down-512.png',
+                          }
+                          : {
+                            uri:
+                              'https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-ios7-arrow-right-512.png',
+                          }
+                      }
+                    />
+                  </View>)]} style={styles.title} width={130} heightArr={[43]} textStyle={styles.text} />
+                <Row data={section.tableHead[0]} textStyle={styles.text} widthArr={data.widthArray} height={43} />
+              </TableWrapper>
+            </Table>
+          </View>
         </View>
-        <Text>{section.tableHead}</Text>
-
-        <Image
-          style={{ height: 25, width: 25 }}
-          source={
-            currentObj == section
-              ? {
-                uri:
-                  'https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-ios7-arrow-down-512.png',
-              }
-              : {
-                uri:
-                  'https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-ios7-arrow-right-512.png',
-              }
-          }
-        />
       </View>
     );
   };
@@ -231,7 +239,7 @@ const AttendanceCode = () => {
           </View>
           <View style={{ flexDirection: 'row', }}>
             <Text style={{ fontWeight: 'bold', fontSize: 20, color: 'black' }}>Assigned Group: </Text>
-            <Text style={{ fontSize: 20, color: 'black' }}>Quit Robotics I think</Text>
+            <Text style={{ fontSize: 20, color: 'black' }}>Web</Text>
           </View>
           <View style={{ height: 10 }}></View>
           <View style={styles.circle}>
@@ -257,7 +265,9 @@ const AttendanceCode = () => {
               </Table>
             </View> */}
             <View style={{}}>
-            <Row data={data.tableHead} style={[styles.head, { backgroundColor: 'pink' }]} height={43} widthArr={data.widthArray} textStyle={styles.text} />
+              <TableWrapper style={{padding: 2}}>
+                <Row data={data.tableHead} style={[styles.head, { backgroundColor: 'pink' }]} height={43} widthArr={data.widthArray} textStyle={styles.text} />
+              </TableWrapper>
               <Accordion
                 sections={list.section}
                 activeSections={activeSections}
@@ -266,6 +276,7 @@ const AttendanceCode = () => {
                 onChange={updateSections}
                 duration={500}
                 underlayColor="#fff"
+                containerStyle={{ marginLeft: 0 }}
               />
             </View>
           </ScrollView>
@@ -330,25 +341,24 @@ const styles = StyleSheet.create({
   // text: { margin: 2, color: 'black', fontSize: 15, textAlign: 'center' },
   // wrapper: { flexDirection: 'row' },
   // dataWrapper: { marginTop: -1 },
-  text: { padding: 6 },
+  text: { padding: 2.5, color: 'black' },
   content: {
     backgroundColor: '#FFFFFF',
-    marginTop: 5,
-    width: '92%',
+    marginTop: 1,
+    width: '100%',
     borderTopColor: '#E9E9E9',
     borderTopWidth: 1,
     alignSelf: 'center',
+    padding: 2,
   },
   header: {
     backgroundColor: '#FFFFFF',
-    marginTop: 1,
-    padding: 6,
+    //marginTop: 1,
+    padding: 2,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
     width: '100%',
-    borderWidth: 2,
-    borderColor: '#c8e1ff',
     alignSelf: 'center',
   },
 });
