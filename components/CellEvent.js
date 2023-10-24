@@ -21,47 +21,47 @@ export default function CellEvent({ detail, prop }) {
     function onDateChange(date) {
         let tempDate = date
         setCurrentDate(tempDate);
-        
+
         let dateList = (tempDate.toString()).split(" ");
         console.log(tempDate.toString())
         console.log(dateList);
-        
+
         let dayList = dateList[2];
-        console.log("Day: " + dayList )
+        console.log("Day: " + dayList)
         let year = dateList[3]
-        console.log("Year: " + year )
+        console.log("Year: " + year)
         let monthList = dateList[1];
-        console.log("Month: " + monthList )
+        console.log("Month: " + monthList)
         let month = "";
         if (monthList == "Jan") {
             month = "January";
-        } else if(monthList == "Feb") {
+        } else if (monthList == "Feb") {
             month = "February";
-        } else if(monthList == "Mar") {
+        } else if (monthList == "Mar") {
             month = "March";
-        } else if(monthList == "Apr") {
+        } else if (monthList == "Apr") {
             month = "April";
-        } else if(monthList == "May") {
+        } else if (monthList == "May") {
             month = "May";
-        } else if(monthList == "Jun") {
+        } else if (monthList == "Jun") {
             month = "June";
-        } else if(monthList == "Jul") {
+        } else if (monthList == "Jul") {
             month = "July";
-        } else if(monthList == "Aug") {
+        } else if (monthList == "Aug") {
             month = "August";
-        } else if(monthList == "Sep") {
+        } else if (monthList == "Sep") {
             month = "September";
-        } else if(monthList == "Oct") {
+        } else if (monthList == "Oct") {
             month = "October";
-        } else if(monthList == "Nov") {
+        } else if (monthList == "Nov") {
             month = "November";
-        } else if(monthList == "Dec") {
+        } else if (monthList == "Dec") {
             month = "December";
         }
-        let finalDate = month + " " + dayList + ", " + year;
+        let finalDate = month + " " + dayList + ", " + year + " - 12:56 AM";
         setCurrentDate(finalDate);
         setShowModal(false);
-      }
+    }
 
     const dropdownData = [
         { label: "Team Meeting", value: 1 },
@@ -75,12 +75,13 @@ export default function CellEvent({ detail, prop }) {
 
     if (prop == 'input') {
         //Input Component
-        comp = <TextInput
-            style={[styles.input,]}
-            onChangeText={onChangeNumber}
-            value={number}
-            placeholder=""
-        />
+        comp =
+            <TextInput
+                style={styles.input}
+                onChangeText={onChangeNumber}
+                value={number}
+                placeholder=""
+            />
     } else if (prop == 'scroll') {
         comp =
             <View style={styles.scrollViewPick}>
@@ -110,7 +111,11 @@ export default function CellEvent({ detail, prop }) {
                 </TouchableOpacity>
                 <Modal visible={showModal} transparent={true}>
                     <View style={{}}>
-                        <View style={{ height: '45%' }}></View>
+                        <TouchableOpacity activeOpacity={1.0} onPress={() => setShowModal(false)} style={{ height: '45%' }}>
+                            <View style={{ height: '100%', width: '100%', backgroundColor: "transparent" }}>
+
+                            </View>
+                        </TouchableOpacity>
                         <View style={{ height: '55%', backgroundColor: 'white', flexDirection: 'column' }}>
                             <View style={{ backgroundColor: 'white', height: '92%', borderColor: 'transparent', borderWidth: 1, flexDirection: 'column' }}>
                                 <CalendarPicker
@@ -118,11 +123,11 @@ export default function CellEvent({ detail, prop }) {
                                     todayBackgroundColor="green"
                                     selectedDayColor="#87CEEB"
                                     selectedDayTextColor="#FFFFFF"
-                                    onDateChange={onDateChange} 
+                                    onDateChange={onDateChange}
                                 />
                             </View>
-                            <View style={{ flexDirection: 'row', height: '10%', transform: [{translateY: -8}] }}>
-                                <TouchableOpacity onPress={() => setShowModal(false)} activeOpacity={1.0} style={styles.closeButton}><Text style={{ fontWeight: 'bold'}}>Close</Text></TouchableOpacity>
+                            <View style={{ flexDirection: 'row', height: '10%', transform: [{ translateY: -8 }] }}>
+                                <TouchableOpacity onPress={() => setShowModal(false)} activeOpacity={1.0} style={styles.closeButton}><Text style={{ fontWeight: 'bold' }}>Close</Text></TouchableOpacity>
                             </View>
                         </View>
                     </View>
@@ -175,7 +180,7 @@ const styles = StyleSheet.create({
     cell: {
         justifyContent: 'left',
         alignItems: 'center',
-        width: '94%',
+        width: '95%',
         height: 60,
         borderWidth: 1,
         marginTop: 5,
@@ -188,14 +193,14 @@ const styles = StyleSheet.create({
         color: 'white',
         //
         //
-        width: '40%',
+        width: '35%',
         fontSize: 20,
         marginLeft: 5,
     },
 
     input: {
         height: '60%',
-        width: '55%',
+        width: '60%',
         borderWidth: 1,
         borderRadius: 10,
         borderWidth: 1,
@@ -205,12 +210,16 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         alignItems: 'center',
         justifyContent: 'center',
-        fontSize: 16
+        marginLeft: 5,
+        textAlignVertical: 'center',
+        fontSize: 16,
+        alignContent: 'center',
+        lineHeight: 10
     },
 
     input2: {
         height: '60%',
-        width: '55%',
+        width: '60%',
         borderWidth: 1,
         borderRadius: 10,
         borderWidth: 1,
@@ -219,8 +228,7 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         justifyContent: 'center',
         textAlign: 'center',
-        zIndex: 0,
-        elevation: 0,
+        marginLeft: 5
     },
 
     input3: {
@@ -265,14 +273,15 @@ const styles = StyleSheet.create({
 
     dropdown: {
         height: '60%',
-        width: '55%',
+        width: '60%',
         borderWidth: 1,
         borderRadius: 10,
         borderWidth: 1,
         borderColor: '#525252',
         paddingLeft: 10,
         color: 'white',
-        textAlign: 'center'
+        textAlign: 'center',
+        marginLeft: 5
     },
 
     selectedTextStyle: {
