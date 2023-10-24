@@ -1,25 +1,26 @@
-import React, { Component, useState } from 'react';
+import React, { Component } from 'react';
 import { StyleSheet, View, Image, Text, Dimensions } from 'react-native';
 import { Table, Row, Rows } from 'react-native-table-component';
 import Accordion from 'react-native-collapsible/Accordion';
 
-function App() {
-  const [list, setList] = useState(
-    {
+export default class ExampleOne extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      activeSections: [],
       section: [
         {
           tableHead: ['this is my drop table'],
           tableData: [['1', '2'], ['a', 'b'], ['1', '2'], ['a', 'b']],
         },
-      ]
-    }
-  )
-  const [activeSections, setActiveSections] = useState([])
+      ],
+    };
+  }
 
-  const renderHeader = section => {
+  renderHeader = section => {
     console.log('state', section);
-    let index = activeSections[0];
-    let currentObj = list.section[index];
+    let index = this.state.activeSections[0];
+    let currentObj = this.state.section[index];
     return (
       <View style={styles.header}>
         <Text>{section.tableHead}</Text>
@@ -29,20 +30,20 @@ function App() {
           source={
             currentObj == section
               ? {
-                uri:
-                  'https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-ios7-arrow-down-512.png',
-              }
+                  uri:
+                    'https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-ios7-arrow-down-512.png',
+                }
               : {
-                uri:
-                  'https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-ios7-arrow-right-512.png',
-              }
+                  uri:
+                    'https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-ios7-arrow-right-512.png',
+                }
           }
         />
       </View>
     );
   };
 
-  const renderContent = section => {
+  renderContent = section => {
     return (
       <View style={styles.content}>
         <Table borderStyle={{ borderWidth: 2, borderColor: '#c8e1ff' }}>
@@ -52,25 +53,23 @@ function App() {
     );
   };
 
-  const updateSections = activeSections2 => {
-    console.log(activeSections2)
-    let temp = activeSections2
-    console.log(temp)
-    setActiveSections(temp)
-    //setActiveSections({ activeSections2 });
+  updateSections = activeSections => {
+    this.setState({ activeSections });
   };
 
-  return (
-    <Accordion
-      sections={list.section}
-      activeSections={activeSections}
-      renderHeader={renderHeader}
-      renderContent={renderContent}
-      onChange={updateSections}
-      duration={500}
-      underlayColor="#fff"
-    />
-  );
+  render() {
+    return (
+      <Accordion
+        sections={this.state.section}
+        activeSections={this.state.activeSections}
+        renderHeader={this.renderHeader}
+        renderContent={this.renderContent}
+        onChange={this.updateSections}
+        duration={500}
+        underlayColor="#fff"
+      />
+    );
+  }
 }
 
 const styles = StyleSheet.create({
@@ -96,5 +95,3 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
   },
 });
-
-export default App;
