@@ -10,6 +10,7 @@ export default function CellEvent({ detail, prop }) {
     const [number, onChangeNumber] = React.useState.apply('');
     const [textDate, setTextDate] = React.useState('')
     const [currentDate, setCurrentDate] = React.useState("")
+    const [showModal, setShowModal] = React.useState(false);
 
     const [index, setIndex] = React.useState(0);
     const ref = React.useRef();
@@ -18,7 +19,48 @@ export default function CellEvent({ detail, prop }) {
     };
 
     function onDateChange(date) {
-        setCurrentDate(date)
+        let tempDate = date
+        setCurrentDate(tempDate);
+        
+        let dateList = (tempDate.toString()).split(" ");
+        console.log(tempDate.toString())
+        console.log(dateList);
+        
+        let dayList = dateList[2];
+        console.log("Day: " + dayList )
+        let year = dateList[3]
+        console.log("Year: " + year )
+        let monthList = dateList[1];
+        console.log("Month: " + monthList )
+        let month = "";
+        if (monthList == "Jan") {
+            month = "January";
+        } else if(monthList == "Feb") {
+            month = "February";
+        } else if(monthList == "Mar") {
+            month = "March";
+        } else if(monthList == "Apr") {
+            month = "April";
+        } else if(monthList == "May") {
+            month = "May";
+        } else if(monthList == "Jun") {
+            month = "June";
+        } else if(monthList == "Jul") {
+            month = "July";
+        } else if(monthList == "Aug") {
+            month = "August";
+        } else if(monthList == "Sep") {
+            month = "September";
+        } else if(monthList == "Oct") {
+            month = "October";
+        } else if(monthList == "Nov") {
+            month = "November";
+        } else if(monthList == "Dec") {
+            month = "December";
+        }
+        let finalDate = month + " " + dayList + ", " + year;
+        setCurrentDate(finalDate);
+        setShowModal(false);
       }
 
     const dropdownData = [
@@ -61,29 +103,26 @@ export default function CellEvent({ detail, prop }) {
 
     } else if (prop == 'calander') {
 
-        const [showModal, setShowModal] = React.useState(false);
-
         comp =
             <View style={styles.calanderView}>
                 <TouchableOpacity onPress={() => setShowModal(true)} style={styles.input2}>
-                    <Text> {currentDate.toString()} </Text>
+                    <Text style={{ color: 'white', fontSize: 16, }}> {currentDate.toString()} </Text>
                 </TouchableOpacity>
                 <Modal visible={showModal} transparent={true}>
                     <View style={{}}>
-                        <View style={{ height: '50%' }}></View>
-                        <View style={{ height: '50%', backgroundColor: 'white', flexDirection: 'column' }}>
-                            <View style={{ backgroundColor: 'white', height: '90%', borderColor: 'black', borderWidth: 1 }}>
+                        <View style={{ height: '45%' }}></View>
+                        <View style={{ height: '55%', backgroundColor: 'white', flexDirection: 'column' }}>
+                            <View style={{ backgroundColor: 'white', height: '92%', borderColor: 'transparent', borderWidth: 1, flexDirection: 'column' }}>
                                 <CalendarPicker
                                     style={{ margin: 40, elevation: 4, borderRadius: 10, height: '50%' }}
-                                    todayBackgroundColor="#f2e6ff"
-                                    selectedDayColor="#7300e6"
+                                    todayBackgroundColor="green"
+                                    selectedDayColor="#87CEEB"
                                     selectedDayTextColor="#FFFFFF"
                                     onDateChange={onDateChange} 
                                 />
                             </View>
-                            <View style={{ flexDirection: 'row', height: '10%' }}>
-                                <TouchableOpacity onPress={() => setShowModal(false)} activeOpacity={1.0} style={styles.closeButton}><Text>Close</Text></TouchableOpacity>
-                                <TouchableOpacity activeOpacity={1.0} style={styles.openButton}><Text>Select</Text></TouchableOpacity>
+                            <View style={{ flexDirection: 'row', height: '10%', transform: [{translateY: -8}] }}>
+                                <TouchableOpacity onPress={() => setShowModal(false)} activeOpacity={1.0} style={styles.closeButton}><Text style={{ fontWeight: 'bold'}}>Close</Text></TouchableOpacity>
                             </View>
                         </View>
                     </View>
@@ -166,6 +205,7 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         alignItems: 'center',
         justifyContent: 'center',
+        fontSize: 16
     },
 
     input2: {
@@ -177,7 +217,8 @@ const styles = StyleSheet.create({
         borderColor: '#525252',
         alignItems: 'center',
         flexDirection: 'column',
-        alignItems: 'center',
+        justifyContent: 'center',
+        textAlign: 'center',
         zIndex: 0,
         elevation: 0,
     },
@@ -268,16 +309,8 @@ const styles = StyleSheet.create({
         width: '100%',
     },
 
-    openButton: {
-        width: '50%',
-        backgroundColor: 'lime',
-        alignItems: 'center',
-        justifyContent: 'center',
-        textAlign: 'center'
-    },
-
     closeButton: {
-        width: '50%',
+        width: '100%',
         backgroundColor: 'red',
         textAlign: 'center',
         alignItems: 'center',
