@@ -1,6 +1,6 @@
 import React, { Component, useState } from 'react';
 import { StyleSheet, View, Image, Text, Dimensions } from 'react-native';
-import { Table, Row, Rows } from 'react-native-table-component';
+import { Table, Row, Rows } from 'react-native-reanimated-table';
 import Accordion from 'react-native-collapsible/Accordion';
 
 function App() {
