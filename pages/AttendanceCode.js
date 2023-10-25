@@ -61,12 +61,14 @@ const AttendanceCode = () => {
   const [number, onChangeNumber] = useState('');
   const [data, setData] = useState({
     tableHead: ['', 'Requirement', 'Goal', 'Attended', 'Possible', 'Percent', 'Status'],
+    tableHead2: ['Event Date', 'Event Title', 'Cutoff Time', 'Checkin Time', 'Attended'],
     tableTitle: [[dropdownTitle('Team Meeting', 0)], [dropdownTitle('FIRST \nWorkshops', 1)], [dropdownTitle('Community Outreach', 2)], [dropdownTitle('Community Service', 3)], [dropdownTitle('Off Season Competition', 4)], [dropdownTitle('YPP Training', 5)], [dropdownTitle('Saftey Training', 6)]],
     //flexArray: [75, 25, 55, 10, 90, 90, 75],
     flexArray: [1, 1, 1, 1, 1, 1, 1],
     flexArray2: [48, 13, 20, 20, 20, 50],
-    widthArray: [130, 90, 90, 90, 100, 90,],
-    widthArray2: [80, 80, 80, 90, 85,],
+    widthArray: [130, 100, 50, 80, 80, 80,],
+    widthArray2: [104, 104, 104, 104, 104],
+    widthArray3: [100, 50, 80, 80, 80,],
   })
 
   const onOpenlink = () => {
@@ -128,17 +130,21 @@ const AttendanceCode = () => {
       setOpneScanner(true);
     }
   };
+  const [header, setHeader] = useState({
+    data: [['Requirement', 'Goal', 'Attended', 'Possible', 'Percent', 'Status']],
+    data2: [['Event Date', 'Event Title', 'Cutoff Time', 'Checkin Time', 'Attended']],
+  })
   const [list, setList] = useState(
     {
       section: [
         {
           tableTitle: ['Team Meeting'],
-          tableHead: [['Requirement', 'Goal', 'Attended', 'Possible', 'Percent', 'Status']],
+          tableHead: [['1', '1', '1', '1', '1', '1']],
           tableData: [['1', '2', '1', '2', '1', '2'], ['1', '2', '1', '2', '1', '2'], ['1', '2', '1', '2', '1', '2'], ['1', '2', '1', '2', '1', '2']],
         },
         {
           tableTitle: ['Community Outreach'],
-          tableHead: [['Requirement', 'Goal', 'Attended', 'Possible', 'Percent', 'Status']],
+          tableHead: [['2', '2', '2', '2', '2', '2']],
           tableData: [['1', '2', '1', '2', '1', '2'], ['1', '2', '1', '2', '1', '2'], ['1', '2', '1', '2', '1', '2'], ['1', '2', '1', '2', '1', '2']],
         },
       ]
@@ -158,7 +164,7 @@ const AttendanceCode = () => {
               <TableWrapper style={{ flexDirection: 'row' }}>
                 <Col data={[(
                   <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
-                    <Text style={[styles.text, {fontWeight: 'bold'}]}>{section.tableTitle}</Text>
+                    <Text style={[styles.text, { fontWeight: 'bold' }]}>{section.tableTitle}</Text>
                     <Image
                       style={{ height: 25, width: 25 }}
                       source={
@@ -174,7 +180,7 @@ const AttendanceCode = () => {
                       }
                     />
                   </View>)]} style={styles.title} width={130} heightArr={[43]} textStyle={styles.text} />
-                <Row data={section.tableHead[0]} textStyle={styles.text} widthArr={data.widthArray} height={43} />
+                <Row data={section.tableHead[0]} textStyle={styles.text} widthArr={data.widthArray3} height={43} />
               </TableWrapper>
             </Table>
           </View>
@@ -187,7 +193,8 @@ const AttendanceCode = () => {
     return (
       <View style={styles.content}>
         <Table borderStyle={{ borderWidth: 2, borderColor: '#c8e1ff' }}>
-          <Rows data={section.tableData} textStyle={styles.text} />
+          <Row data={data.tableHead2} textStyle={[styles.text, { fontWeight: 'bold' }]} widthArr={data.widthArray2} height={43} />
+          <Rows data={section.tableData} textStyle={styles.text} widthArr={data.widthArray2} />
         </Table>
       </View>
     );
@@ -265,9 +272,9 @@ const AttendanceCode = () => {
               </Table>
             </View> */}
             <View style={{}}>
-              <TableWrapper style={{padding: 2}}>
-                <Row data={data.tableHead} style={[styles.head, { backgroundColor: 'pink' }]} height={43} widthArr={data.widthArray} textStyle={styles.text} />
-              </TableWrapper>
+              <Table borderStyle={{ borderWidth: 2, borderColor: '#c8e1ff', padding: 2 }}>
+                <Row data={data.tableHead} textStyle={[styles.text, { fontWeight: 'bold' }]} widthArr={data.widthArray} height={43} />
+              </Table>
               <Accordion
                 sections={list.section}
                 activeSections={activeSections}
@@ -341,7 +348,7 @@ const styles = StyleSheet.create({
   // text: { margin: 2, color: 'black', fontSize: 15, textAlign: 'center' },
   // wrapper: { flexDirection: 'row' },
   // dataWrapper: { marginTop: -1 },
-  text: { padding: 2.5, color: 'black' },
+  text: { padding: 2.5, color: 'black', justifyContent: 'center', textAlign: 'center' },
   content: {
     backgroundColor: '#FFFFFF',
     marginTop: 1,
@@ -349,12 +356,12 @@ const styles = StyleSheet.create({
     borderTopColor: '#E9E9E9',
     borderTopWidth: 1,
     alignSelf: 'center',
-    padding: 2,
   },
   header: {
     backgroundColor: '#FFFFFF',
     //marginTop: 1,
-    padding: 2,
+    paddingTop: 2,
+    paddingBottom: 2,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
