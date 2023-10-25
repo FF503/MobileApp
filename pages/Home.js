@@ -9,7 +9,7 @@ const [selected, setSelected] = useState('');
       //moment().add(7,"days")
     
     return(
-        <View>
+        <View style = {{backgroundColor: "#EDEDED", height: "100%"}}>
             {/* <Headers centerComponent ={{text: "Home", style: {color: "#fff"}}}/> */}
             <View>
             <Text style={styles.Header}>
@@ -19,9 +19,18 @@ const [selected, setSelected] = useState('');
             </View>
     <View>
     <Text style={styles.Header2}>Recent Updates</Text>
-    
+    <View style={styles.update}>
+      <Image
+      source={require("../images/alert.png")}
+      style={styles.alertImage}
+      />
+    <View style={{alignSelf:"center",marginLeft:10}}>
+      <Text style={{fontSize:24,color: "black",fontWeight: "500"}}>Mech Meet Up Room 186</Text>
+      <Text style={{fontSize:24,}}>10:00 a.m.</Text>
+      </View>
     </View>
-    <View>
+    </View>
+
     <View
   style={{
     marginLeft: "2.5%",
@@ -54,12 +63,17 @@ const [selected, setSelected] = useState('');
                     textDisabledColor: 'gray',
                     textMonthFontSize: 32, 
                     textDayHeaderFontSize: 16,
-                    rightArrow: 24,
+                    rightArrow: 100,
+                    leftArrow: 100,
+                    fontSize: 24,
+                    textDayFontSize: 20,
+                    arrowHeight: 100,
+                    arrowWidth:100,
+                    
                 }}
                 
                 
             />
-  </View>
   </View>
         
     )
@@ -88,37 +102,29 @@ const styles = StyleSheet.create({
         color: "#000000",
         marginLeft: 24
     },
+    alertImage:{
+      alignSelf: "center",
+      
+      width: 70,
+      height: 70,
+    },
     arrow: { fontSize: 50, margin: 100 },
     container: { flex: 1,height: 100,
       padding: 20,flexDirection: 'row'  },
-      leftArrow: {
-        width: 0,
-        height: 0,
-        backgroundColor: "transparent",
-        borderStyle: "solid",
-        borderLeftWidth: 25,
-        borderRightWidth: 25,
-        borderBottomWidth: 50,
-        borderLeftColor: "transparent",
-        borderRightColor: "transparent",
-        borderBottomColor: "black",
-        margin: 5,
-        marginTop: 15,
-        transform: [{ rotate: "-90deg" }],
-      },
-      rightArrow: {
-        width: 0,
-        height: 0,
-        backgroundColor: "transparent",
-        borderStyle: "solid",
-        borderLeftWidth: 25,
-        borderRightWidth: 25,
-        borderBottomWidth: 50,
-        borderLeftColor: "transparent",
-        borderRightColor: "transparent",
-        borderBottomColor: "black",
-        margin: 5,
-        transform: [{ rotate: "90deg" }],
+      update: {
+        // height: 75,
+        flexDirection:'row',
+        backgroundColor: 'white',
+        borderRadius: 8,
+        
+        width: '95%',
+        height: "25%",
+        alignSelf: "center",
+        marginVertical: 10,
+        shadowColor: '#171717',
+        shadowOffset: {width: -2, height: 4},
+        shadowOpacity: 0.2,
+        shadowRadius: 3,
       },
       container1:{flex: 10}
    })
