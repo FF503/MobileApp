@@ -1,8 +1,27 @@
 import React, {useState} from 'react'
 import { Calendar } from 'react-native-calendars'; 
-import {TextInput, View, Text, Button,Image, Touchable, TouchableOpacity, ScrollView,StyleSheet,Headers} from 'react-native'
+import {TextInput, View, Text, Button,Image, FlatList,Touchable, TouchableOpacity, ScrollView,StyleSheet,Headers} from 'react-native'
 import moment from 'moment';
 console.log("WE OPEN ")
+
+const DATA = [
+  {
+    id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
+    title: 'First Item',
+    time: "10:00am"
+  },
+  {
+    id: '3ac68afc-c605-48d3-a4f8-fbd91aa97f63',
+    title: 'Second Item',
+    time: "10:00am"
+  },
+  {
+    id: '58694a0f-3da1-471f-bd96-145571e29d72',
+    title: 'Third Item',
+    time: "10:00am"
+  },
+];
+
 const Home =()=>{
 // Initialize with today's date
 const [selected, setSelected] = useState('');
@@ -19,7 +38,7 @@ const [selected, setSelected] = useState('');
             </View>
     <View>
     <Text style={styles.Header2}>Recent Updates</Text>
-    <View style={styles.update}>
+    {/* <View style={styles.update}>
       <Image
       source={require("../images/alert.png")}
       style={styles.alertImage}
@@ -28,9 +47,16 @@ const [selected, setSelected] = useState('');
       <Text style={{fontSize:24,color: "black",fontWeight: "500"}}>Mech Meet Up Room 186</Text>
       <Text style={{fontSize:24,}}>10:00 a.m.</Text>
       </View>
+    </View> */}
+ <View style={{marginTop: 10}}>
+  <FlatList
+        data={DATA}
+        renderItem={({item}) => <Item title={item.title} time={item.time} />}
+        keyExtractor={item => item.id}
+      />
     </View>
     </View>
-
+    
     <View
   style={{
     marginLeft: "2.5%",
@@ -79,6 +105,21 @@ const [selected, setSelected] = useState('');
     )
    
 }
+
+
+const Item = ({title,time}) => (
+  <View style={styles.update}>
+  <Image
+  source={require("../images/alert.png")}
+  style={styles.alertImage}
+  />
+<View style={{alignSelf:"center",marginLeft:10}}>
+  <Text style={{fontSize:24,color: "black",fontWeight: "500"}}>{title}</Text>
+  <Text style={{fontSize:24,}}>{time}</Text>
+  </View>
+</View>
+);
+
 const styles = StyleSheet.create({
     Header:{
     textAlign: 'left',
@@ -118,9 +159,9 @@ const styles = StyleSheet.create({
         borderRadius: 8,
         
         width: '95%',
-        height: "25%",
+        height: "60%",
         alignSelf: "center",
-        marginVertical: 10,
+        
         shadowColor: '#171717',
         shadowOffset: {width: -2, height: 4},
         shadowOpacity: 0.2,
