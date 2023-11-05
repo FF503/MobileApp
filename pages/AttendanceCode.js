@@ -17,13 +17,10 @@ import {
 import { Table, TableWrapper, Row, Rows, Col, Cols, Cell } from 'react-native-reanimated-table';
 import ProgressCircle from 'react-native-progress-circle'
 import Accordion from 'react-native-collapsible/Accordion';
-import { useCameraDevices } from 'react-native-vision-camera';
-import { Camera } from 'react-native-vision-camera';
-import { useScanBarcodes, BarcodeFormat } from 'vision-camera-code-scanner';
-
+import { Camera, useCameraPermission, useCameraDevice } from 'react-native-vision-camera'
 const AttendanceCode = () => {
   const [qrvalue, setQrvalue] = useState('');
-  const [opneScanner, setOpneScanner] = useState(false);
+  const [opneScanner, setOpneScanner] = useState(true);
   const [number, onChangeNumber] = useState('');
   const [tableData, setTableData] = useState({
     tableHead: ['', 'Requirement', 'Goal', 'Attended', 'Possible', 'Percent', 'Status'],
@@ -104,46 +101,17 @@ const AttendanceCode = () => {
     setActiveSections(temp)
   };
 
-  const [hasPermission, setHasPermission] = React.useState(false);
-  const devices = useCameraDevices();
-  const device = devices.back;
-
-  const [frameProcessor, barcodes] = useScanBarcodes([BarcodeFormat.QR_CODE], {
-    checkInverted: true,
-  });
-
-  // Alternatively you can use the underlying function:
-  //
-  // const frameProcessor = useFrameProcessor((frame) => {
-  //   'worklet';
-  //   const detectedBarcodes = scanBarcodes(frame, [BarcodeFormat.QR_CODE], { checkInverted: true });
-  //   runOnJS(setBarcodes)(detectedBarcodes);
-  // }, []);
-
-  useEffect(() => {
-    (async () => {
-      const status = await Camera.requestCameraPermission();
-      setHasPermission(status === 'authorized');
-    })();
-  }, []);
-
+  const { hasPermission, requestPermission } = useCameraPermission()
+  const device = useCameraDevice('front')
+  if (device == null) return <NoCameraErrorView />
   return (
     <SafeAreaView style={{}}>
-      {opneScanner && device != null && hasPermission ? (
-        <>
-          <Camera
-            style={StyleSheet.absoluteFill}
-            device={device}
-            isActive={true}
-            frameProcessor={frameProcessor}
-            frameProcessorFps={5}
-          />
-          {barcodes.map((barcode, idx) => (
-            <Text key={idx} style={styles.barcodeTextURL}>
-              {barcode.displayValue}
-            </Text>
-          ))}
-        </>
+      {opneScanner ? (
+        <Camera
+          style={StyleSheet.absoluteFill}
+          device={device}
+          isActive={true}
+        />
       ) : (
         <ScrollView>
           <View style={{ width: Dimensions.get('window').width, marginTop: 10 }}>
