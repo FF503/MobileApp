@@ -12,15 +12,17 @@ import {
   Image,
   TextInput,
   ScrollView,
-  Dimensions
+  Dimensions,
 } from 'react-native';
 import { Table, TableWrapper, Row, Rows, Col, Cols, Cell } from 'react-native-reanimated-table';
 import ProgressCircle from 'react-native-progress-circle'
 import Accordion from 'react-native-collapsible/Accordion';
-import { Camera, useCameraPermission, useCameraDevice } from 'react-native-vision-camera'
+//import { Camera, useCameraPermission, useCameraDevice } from 'react-native-vision-camera'
+import { CameraScreen } from 'react-native-camera-kit';
+
 const AttendanceCode = () => {
   const [qrvalue, setQrvalue] = useState('');
-  const [opneScanner, setOpneScanner] = useState(true);
+  const [opneScanner, setOpneScanner] = useState(false);
   const [number, onChangeNumber] = useState('');
   const [tableData, setTableData] = useState({
     tableHead: ['', 'Requirement', 'Goal', 'Attended', 'Possible', 'Percent', 'Status'],
@@ -101,26 +103,76 @@ const AttendanceCode = () => {
     setActiveSections(temp)
   };
 
-  const { hasPermission, requestPermission } = useCameraPermission()
-  const device = useCameraDevice('front')
-  if (device == null) return <NoCameraErrorView />
+  const onOpenlink = () => {
+    // If scanned then function to open URL in Browser
+    Linking.openURL(qrvalue);
+  };
+
+  const onBarcodeScan = (qrvalue) => {
+    // Called after te successful scanning of QRCode/Barcode
+    setQrvalue(qrvalue);
+    onChangeNumber(qrvalue)
+    setOpneScanner(false);
+  };
+
+  const onOpneScanner = () => {
+    // To Start Scanning
+    if (Platform.OS === 'android') {
+      async function requestCameraPermission() {
+        try {
+          const granted = await PermissionsAndroid.request(
+            PermissionsAndroid.PERMISSIONS.CAMERA,
+            {
+              title: 'Camera Permission',
+              message: 'App needs permission for camera access',
+            },
+          );
+          if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+            // If CAMERA Permission is granted
+            setQrvalue('');
+            setOpneScanner(true);
+          } else {
+            Alert('CAMERA permission denied');
+          }
+        } catch (err) {
+          Alert('Camera permission err', err);
+          console.warn(err);
+        }
+      }
+      // Calling the camera permission function
+      requestCameraPermission();
+    } else {
+      setQrvalue('');
+      setOpneScanner(true);
+    }
+  };
   return (
     <SafeAreaView style={{}}>
       {opneScanner ? (
-        <Camera
-          style={StyleSheet.absoluteFill}
-          device={device}
-          isActive={true}
-        />
+        <View style={{ flex: 1 }}>
+          <CameraScreen
+            showFrame={false}
+            // Show/hide scan frame
+            scanBarcode={true}
+            // Can restrict for the QR Code only
+            laserColor={'blue'}
+            // Color can be of your choice
+            frameColor={'yellow'}
+            // If frame is visible then frame color
+            colorForScannerFrame={'black'}
+            // Scanner Frame color
+            onReadCode={(event) =>
+              onBarcodeScan(event.nativeEvent.codeStringValue)
+            }
+          />
+        </View>
       ) : (
         <ScrollView>
           <View style={{ width: Dimensions.get('window').width, marginTop: 10 }}>
             <View style={{ flexDirection: 'row', width: Dimensions.get('window').width - 10, justifyContent: 'space-between', marginLeft: 10 }}>
               <Text style={{ fontSize: 35, color: 'black' }}>Attendance</Text>
               <TouchableOpacity style={{ marginRight: 5 }}
-                onPress={async () => {
-                  setOpneScanner(true)
-                }}
+                onPress={onOpneScanner}
               >
                 <Image style={{ width: 50, height: 50 }} source={require("../images/cameraIconPink.png")} />
               </TouchableOpacity>
@@ -146,7 +198,7 @@ const AttendanceCode = () => {
             </View>
             <View style={{ flexDirection: 'row', }}>
               <Text style={{ fontWeight: 'bold', fontSize: 20, color: 'black', marginLeft: 10 }}>Assigned Group: </Text>
-              <Text style={{ fontSize: 20, color: 'black' }}>{qrvalue}</Text>
+              <Text style={{ fontSize: 20, color: 'black' }}>Web</Text>
             </View>
             <View style={{ height: 10 }}></View>
             <View style={styles.circle}>
