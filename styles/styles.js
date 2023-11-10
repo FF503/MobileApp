@@ -1,5 +1,4 @@
 import { StyleSheet,Dimensions } from 'react-native';
-import { color } from 'react-native-reanimated';
 
 export const COLORS = {
   primary: "#EC2578",

@@ -1,13 +1,9 @@
 //import React from 'react';
 import {View, StyleSheet, Image, Text, Modal,useState, TouchableOpacity} from 'react-native'
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Ranking from '../pages/Ranking';
 import About from '../pages/About';
 import { COLORS, STYLES } from '../styles/styles';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
-import { Colors } from 'react-native/Libraries/NewAppScreen';
-
-
 
 const Tabs = () => {
       //const [modalVisible, setModalVisible] = useState(false);
@@ -40,6 +36,7 @@ const Tabs = () => {
         return(
   
             <Tab.Navigator 
+                  initialRouteName='Home'
                   tabBarPosition='bottom'
                   screenOptions = {{
                         tabBarIndicatorStyle:{
