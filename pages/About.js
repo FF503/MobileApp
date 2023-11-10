@@ -5,7 +5,7 @@ import { COLORS, STYLES } from '../styles/styles';
 const About = () => {
     return(
         <View style={{backgroundColor: COLORS.background,flex:1}}>
-            <Text style = {[STYLES.title, {marginLeft:"5%", marginBottom: 5}]}>About: We are cool</Text>
+            <Text style = {[STYLES.title, {marginLeft:"5%", marginBottom: 5}]}>About: Welcome!! we are cool</Text>
             {/* <Image
                 style = {{width:50,height:50}}
                 source = {require('../assets/images/home.png')}
