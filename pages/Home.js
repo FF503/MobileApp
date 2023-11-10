@@ -48,7 +48,7 @@ const [selected, setSelected] = useState('');
       <Text style={{fontSize:24,}}>10:00 a.m.</Text>
       </View>
     </View> */}
- <View style={{marginTop: 10}}>
+ <View style={{marginTop: 10, height:"auto" }}>
   <FlatList
         data={DATA}
         renderItem={({item}) => <Item title={item.title} time={item.time} />}
@@ -113,14 +113,25 @@ const Item = ({title,time}) => (
   source={require("../images/alert.png")}
   style={styles.alertImage}
   />
-<View style={{alignSelf:"center",marginLeft:10}}>
+<View style={{flex: 1,marginLeft:10,flexDirection:"row", }}>
+  <View >
   <Text style={{fontSize:24,color: "black",fontWeight: "500"}}>{title}</Text>
   <Text style={{fontSize:24,}}>{time}</Text>
   </View>
+  <View style={{ flex: 1,flexDirection: "row-reverse", alignSelf:"flex-start"}}>
+    <Image
+      source={require("../images/Icon_Close.png")}
+      style={{width: 30,
+        height: 30, marginRight:"5%"}}
+    /> 
+  </View>
+  </View>
+
 </View>
 );
 
 const styles = StyleSheet.create({
+    
     Header:{
     textAlign: 'left',
     fontSize: 40,
@@ -152,15 +163,16 @@ const styles = StyleSheet.create({
     arrow: { fontSize: 50, margin: 100 },
     container: { flex: 1,height: 100,
       padding: 20,flexDirection: 'row'  },
-      update: {
+    update: {
         // height: 75,
         flexDirection:'row',
         backgroundColor: 'white',
         borderRadius: 8,
         
         width: '95%',
-        height: "60%",
+        height: "auto",
         alignSelf: "center",
+        marginBottom:20,
         
         shadowColor: '#171717',
         shadowOffset: {width: -2, height: 4},
