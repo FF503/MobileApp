@@ -16,7 +16,7 @@ export default function CreateEvent() {
                 <CellEvent detail='Location:' prop='input'>
                     
                 </CellEvent>
-                <CellEvent detail='Open Seats:' prop='scroll'>
+                <CellEvent detail='Open Seats:' prop='input'>
                     
                 </CellEvent>
                 <CellEvent detail='Student Lead:' prop='input'>

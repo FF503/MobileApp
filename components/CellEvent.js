@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ScrollPicker from "react-native-wheel-scrollview-picker";
 import { Stylesheet, Text, View, TextInput, StyleSheet, Image, TouchableOpacity, Modal } from 'react-native';
 import { Dropdown } from 'react-native-element-dropdown';
+import DatePicker from 'react-native-date-picker'
 import CalendarPicker from 'react-native-calendar-picker';
 
 export default function CellEvent({ detail, prop }) {
@@ -11,6 +12,9 @@ export default function CellEvent({ detail, prop }) {
     const [textDate, setTextDate] = React.useState('')
     const [currentDate, setCurrentDate] = React.useState("")
     const [showModal, setShowModal] = React.useState(false);
+    const [output, setOutput] = useState("");
+    const [date, setDate] = useState(new Date())
+
 
     const [index, setIndex] = React.useState(0);
     const ref = React.useRef();
@@ -18,14 +22,14 @@ export default function CellEvent({ detail, prop }) {
         setIndex(selectedIndex);
     };
 
-    function onDateChange(date) {
-        let tempDate = date
-        setCurrentDate(tempDate);
+    function onDateChange(dateArg) {
+        let tempDate = dateArg.toString()
 
         let dateList = (tempDate.toString()).split(" ");
         console.log(tempDate.toString())
         console.log(dateList);
 
+        let timeList = dateList[4];
         let dayList = dateList[2];
         console.log("Day: " + dayList)
         let year = dateList[3]
@@ -58,8 +62,25 @@ export default function CellEvent({ detail, prop }) {
         } else if (monthList == "Dec") {
             month = "December";
         }
-        let finalDate = month + " " + dayList + ", " + year + " - 12:56 AM";
-        setCurrentDate(finalDate);
+        let timeString = timeList.toString()
+        let time = timeString.substring(0,5)
+        let normalFront = time.substring(0,2)
+        let intNormalFront = parseInt(normalFront)
+        let ending = " AM"
+        if(intNormalFront == 12) {
+            ending = " PM"
+        } else if(intNormalFront > 12) {
+            intNormalFront -= 12
+            ending = " PM"
+            console.log("Come here!" + ending)
+        } else if(intNormalFront == 0) {
+            intNormalFront = 12
+        }
+        normalFront = intNormalFront.toString()
+        let finalTime = normalFront + time.substring(2, 5)
+
+        let finalDate = month + " " + dayList + ", " + year + " - " + finalTime + ending;
+        setOutput(finalDate);
         setShowModal(false);
     }
 
@@ -107,16 +128,16 @@ export default function CellEvent({ detail, prop }) {
         comp =
             <View style={styles.calanderView}>
                 <TouchableOpacity onPress={() => setShowModal(true)} style={styles.input2}>
-                    <Text style={{ color: 'white', fontSize: 16, }}> {currentDate.toString()} </Text>
+                    <Text style={{ color: 'white', fontSize: 16, textAlign: 'center' }}> {output.toString()} </Text>
                 </TouchableOpacity>
                 <Modal visible={showModal} transparent={true}>
                     <View style={{}}>
-                        <TouchableOpacity activeOpacity={1.0} onPress={() => setShowModal(false)} style={{ height: '45%' }}>
+                        <TouchableOpacity activeOpacity={1.0} onPress={() => setShowModal(false)} style={{ height: '60%' }}>
                             <View style={{ height: '100%', width: '100%', backgroundColor: "transparent" }}>
 
                             </View>
                         </TouchableOpacity>
-                        <View style={{ height: '55%', backgroundColor: 'white', flexDirection: 'column' }}>
+                        {/* <View style={{ height: '55%', backgroundColor: 'white', flexDirection: 'column' }}>
                             <View style={{ backgroundColor: 'white', height: '92%', borderColor: 'transparent', borderWidth: 1, flexDirection: 'column' }}>
                                 <CalendarPicker
                                     style={{ margin: 40, elevation: 4, borderRadius: 10, height: '50%' }}
@@ -129,6 +150,15 @@ export default function CellEvent({ detail, prop }) {
                             <View style={{ flexDirection: 'row', height: '10%', transform: [{ translateY: -8 }] }}>
                                 <TouchableOpacity onPress={() => setShowModal(false)} activeOpacity={1.0} style={styles.closeButton}><Text style={{ fontWeight: 'bold' }}>Close</Text></TouchableOpacity>
                             </View>
+                        </View> */}
+                        <View style={{ backgroundColor: 'white', alignItems: 'center', justifyContent: 'center', height: '40%', borderTopLeftRadius: 40, borderTopRightRadius: 40, borderWidth: 1, borderColor: 'black' }}>
+                            <DatePicker
+                                date={date}
+                                onDateChange={setDate}
+                            />
+                            <TouchableOpacity onPress={() => onDateChange(date)} style={{ marginTop: 25, backgroundColor: 'green', width: '75%', borderRadius: 40, paddingTop: 5, paddingBottom: 5 }}>
+                                <Text style={{ fontSize: 20, color: 'white', textAlign: 'center' }}> Select </Text>
+                            </TouchableOpacity>
                         </View>
                     </View>
                 </Modal>
@@ -178,8 +208,9 @@ export default function CellEvent({ detail, prop }) {
 
 const styles = StyleSheet.create({
     cell: {
-        justifyContent: 'left',
+        justifyContent: 'flex-start',
         alignItems: 'center',
+        alignSelf: 'center',
         width: '95%',
         height: 60,
         borderWidth: 1,
@@ -194,13 +225,13 @@ const styles = StyleSheet.create({
         //
         //
         width: '35%',
-        fontSize: 20,
-        marginLeft: 5,
+        fontSize: 19,
+        transform: [{ translateX: 5 }],
     },
 
     input: {
         height: '60%',
-        width: '60%',
+        width: '62%',
         borderWidth: 1,
         borderRadius: 10,
         borderWidth: 1,
@@ -208,18 +239,18 @@ const styles = StyleSheet.create({
         paddingLeft: 10,
         color: 'white',
         textAlign: 'center',
-        alignItems: 'center',
-        justifyContent: 'center',
         marginLeft: 5,
-        textAlignVertical: 'center',
+        textAlignVertical: "center",
+        paddingBottom: 0,
+        paddingTop: 0,
         fontSize: 16,
-        alignContent: 'center',
-        lineHeight: 10
+        justifyContent: 'center',
+        textAlign: 'center'
     },
 
     input2: {
         height: '60%',
-        width: '60%',
+        width: '62%',
         borderWidth: 1,
         borderRadius: 10,
         borderWidth: 1,
@@ -281,7 +312,9 @@ const styles = StyleSheet.create({
         paddingLeft: 10,
         color: 'white',
         textAlign: 'center',
-        marginLeft: 5
+        marginLeft: 5,
+        alignContent: 'center', 
+        justifyContent: 'center'
     },
 
     selectedTextStyle: {
