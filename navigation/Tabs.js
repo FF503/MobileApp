@@ -3,7 +3,7 @@ import {View, StyleSheet, Image, Text, Modal,useState, TouchableOpacity} from 'r
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Ranking from '../pages/Ranking';
 import About from '../pages/About';
-import { STYLES } from '../styles/styles';
+import { COLORS, STYLES } from '../styles/styles';
 
 
 const Tabs = () => {
@@ -36,107 +36,34 @@ const Tabs = () => {
   
         return(
   
-              <Tab.Navigator 
+            <Tab.Navigator 
                     screenOptions = {{
+                  
                           headerShown: false,
                           tabBarShowLabel: false,
                           tabBarStyle:{
-                                position:'absolute',
-                                bottom:15,
-                                left:15,
-                                right:15,
+                              position:"absolute",
+                                bottom:"2%",
+                                left:"6%",
+                                right:"6%",
                                 elevation:10,
-                                backgroundColor: '#ffffff',
+                                backgroundColor: COLORS.primary,
                                 borderRadius: 5,
-                                height:73,
+                                height:"10%",
                                 ...style.shadow
                           }
   
                     }}
               >
-              <Tab.Screen name="Home" component={About} options={{ 
+                  <Tab.Screen name="Settings" component={About} options={{ 
                     tabBarIcon:({focused}) => {
-                          return <View style={{backgroundColor:focused?'#e32f45' : '#748c94',  alignItems:"center", borderRadius: 3, paddingHorizontal:"10%", paddingTop:"9%"}} >
-                              
+                          return <View style={{backgroundColor:focused?COLORS.white : COLORS.primary,...style.icon}}>
                                 <Image
                                       resizeMode = 'contain'
                                       style = {{
                                             width:30,
                                             height:30,
-                                      //tintColor:  focused ? '#e32f45' : '#748c94'
-  
-                                      }}
-                                      source = {require('../assets/images/home.png')}
-  
-                                />
-                                <Text 
-                                style={{color:"white", fontSize:15, marginBottom:"10%"}}
-                                >Home</Text>
-                          </View>
-                          
-                    }
-                    }} />
-
-              <Tab.Screen name="Events" component={Ranking} options={{ 
-                    tabBarIcon:({focused}) => {
-                          return <View>
-                                <Image
-                                      resizeMode = 'contain'
-                                      style = {{
-                                            marginLeft:13,
-                                            width:30,
-                                            height:30,
-                                      tintColor:  focused ? '#e32f45' : '#748c94'
-  
-                                      }}
-                                      //attribution for like flaticon required... graphics pizza
-                                      source = {require('../assets/images/events.png')}
-  
-                                />
-                                <Text
-                                style={{color:focused?'#e32f45' : '#748c94', fontSize:15}}
-                                >Calendar</Text>
-                          </View>
-                          
-                    }
-                    }} />
-              
-  
-              <Tab.Screen name="List" component={Ranking} options={{ 
-                    tabBarIcon:({focused}) => {
-                          return <View>
-                                <Image
-                                      resizeMode = 'contain'
-                                      style = {{
-                                            marginLeft:-1,
-                                            width:30,
-                                            height:30,
-                                      tintColor:  focused ? '#e32f45' : '#748c94'
-  
-                                      }}
-                                      //attribution for like flaticon required... graphics pizza
-                                      source = {require('../assets/images/to-do-list.png')}
-                                      //key={this.state.source.uri}
-  
-                                />
-                                <Text
-                                style={{color:focused?'#e32f45' : '#748c94', fontSize:15}}
-                                >Lists</Text>
-                          </View>
-                          
-                    }
-                    }} />
-  
-              <Tab.Screen name="Settings" component={About} options={{ 
-                    tabBarIcon:({focused}) => {
-                          return <View>
-                                <Image
-                                      resizeMode = 'contain'
-                                      style = {{
-                                            marginLeft:3,
-                                            width:30,
-                                            height:30,
-                                      tintColor:  focused ? '#e32f45' : '#748c94'
+                                      tintColor:  focused?COLORS.primary : COLORS.white
   
                                       }}
                                       //attribution for like flaticon required... graphics pizza
@@ -145,15 +72,109 @@ const Tabs = () => {
   
                                 />
                                 <Text
-                                style={{color:focused?'#e32f45' : '#748c94', fontSize:15}}
+                                style={{color:focused?COLORS.primary : COLORS.white, fontSize:15, marginBottom:"5%"}}
                                 >Setting</Text>
                           </View>
                           
                     }
-                    }} />
+                  }} />
+
+                  <Tab.Screen name="Roster" component={Ranking} options={{ 
+                    tabBarIcon:({focused}) => {
+                          return <View style={{backgroundColor:focused?COLORS.white : COLORS.primary,  ...style.icon}}>
+                                <Image
+                                      resizeMode = 'contain'
+                                      style = {{
+                                            width:30,
+                                            height:30,
+                                      tintColor:  focused?COLORS.primary : COLORS.white
+  
+                                      }}
+                                      //attribution for like flaticon required... graphics pizza
+                                      source = {require('../assets/images/to-do-list.png')}
+                                      //key={this.state.source.uri}
+  
+                                />
+                                <Text
+                                style={{color:focused?COLORS.primary : COLORS.white, fontSize:15, marginBottom:"5%"}}
+                                >Roster</Text>
+                          </View>
+                          
+                    }
+                  }} />
+
+                  <Tab.Screen name="Home" component={About} options={{ 
+                    tabBarIcon:({focused}) => {
+                          return <View style={{backgroundColor:focused?COLORS.white : COLORS.primary, ...style.icon}} >
+                              
+                                <Image
+                                      resizeMode = 'contain'
+                                      style = {{
+                                            width:30,
+                                            height:30,
+                                      tintColor: focused?COLORS.primary : COLORS.white
+  
+                                      }}
+                                      source = {require('../assets/images/home.png')}
+  
+                                />
+                                <Text 
+                                style={{color:focused?COLORS.primary : COLORS.white, fontSize:15, marginBottom:"5%"}}
+                                >Home</Text>
+                          </View>
+                          
+                    }
+                  }} />
+
+                  <Tab.Screen name="Events" component={Ranking} options={{ 
+                    tabBarIcon:({focused}) => {
+                          return <View style={{backgroundColor:focused?COLORS.white : COLORS.primary, ...style.icon}}>
+                                <Image
+                                      resizeMode = 'contain'
+                                      style = {{
+                                            width:30,
+                                            height:30,
+                                      tintColor:  focused?COLORS.primary : COLORS.white
+  
+                                      }}
+                                      //attribution for like flaticon required... graphics pizza
+                                      source = {require('../assets/images/events.png')}
+  
+                                />
+                                <Text
+                                style={{color:focused?COLORS.primary : COLORS.white, fontSize:15, marginBottom:"5%"}}
+                                >Events</Text>
+                          </View>
+                          
+                    }
+                  }} />
+
+                  <Tab.Screen name="Store" component={About} options={{ 
+                    tabBarIcon:({focused}) => {
+                          return <View style={{backgroundColor:focused?COLORS.white : COLORS.primary,  ...style.icon}}>
+                                <Image
+                                      resizeMode = 'contain'
+                                      style = {{
+                                            width:30,
+                                            height:30,
+                                      tintColor:  focused?COLORS.primary : COLORS.white
+  
+                                      }}
+                                      //attribution for like flaticon required... graphics pizza
+                                      source = {require('../assets/images/setting.png')}
+                                      //key={this.state.source.uri}
+  
+                                />
+                                <Text
+                                style={{color:focused?COLORS.primary : COLORS.white, fontSize:15, marginBottom:"5%"}}
+                                >Store</Text>
+                          </View>
+                          
+                    }
+                  }} />
   
               
-              </Tab.Navigator>
+            </Tab.Navigator>
               
             
         )
@@ -172,9 +193,14 @@ const style = StyleSheet.create({
 
       },
       icon:{
-            width: 40,
-            height: 40,
-      }
+            width:"80%",
+            height:"80%",
+            alignItems:"center", 
+            borderRadius: 3, 
+            paddingHorizontal:"3%", 
+            paddingTop:"9%"
+      },
+      
 
 })
 
