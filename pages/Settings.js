@@ -10,7 +10,7 @@ const customCallbackTest = (item,idx) => {
 
 const Settings = () => {
 
-    const itemsd =  [{value:'hi',key:1,callback:customCallbackTest},{value:'hello',key:2,callback:customCallbackTest}]
+    const itemsd =  [{value:'hi',key:1,callback:customCallbackTest},{value:'hello',key:2,callback:customCallbackTest},{value:'bye',key:3,callback:customCallbackTest},{value:'bye',key:4,callback:customCallbackTest},{value:'bye',key:5,callback:customCallbackTest},{value:'bye',key:6,callback:customCallbackTest}]
     return (
         <View style={{flex:1,flexDirection:'column'}}>
             <View style={{flex:1}}>
