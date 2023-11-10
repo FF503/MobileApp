@@ -13,13 +13,13 @@ const NotificationSettings = (props) => {
             <View>
             <Text style = {styles.Header2}>Team Meeting Notification</Text>
             </View>
-            <View>
+            <View style={{backgroundColor:'#111111'}}>
             <Text style = {styles.Header2}>Outreach Notification</Text>
             </View>
-            <View style = {{marginTop: 20}}>
-            <View>
+            <View style = {{marginTop: '20%'}}>
+            <View style = {{backgroundColor: "red",}}>
             <Text style = {styles.Header2}> Group Notifications </Text>
-            <Switch
+            <Switch style = {{marginBottom: '5%'}}
                     trackColor={{false: '#767577', true: '#81b0ff'}}
                     thumbColor={isEnabled ? '#f5dd4b' : '#f4f3f4'}
                     ios_backgroundColor="#3e3e3e"
@@ -27,16 +27,18 @@ const NotificationSettings = (props) => {
                     value={isEnabled}
                 />
             </View>
-              
-            <View>
+            <View style = {{margin: '5%'}}></View>
+            <View style = {{backgroundColor: "#EDEDED"}}>
+            <View style = {{marginBottom: '10%'}}>
             <Text style = {styles.Header2}>New Event Notifications</Text>
-            <Switch
+            <Switch style = {{marginBottom: '5%'}}
                     trackColor={{false: '#767577', true: '#81b0ff'}}
                     thumbColor={isEnabled2 ? '#f5dd4b' : '#f4f3f4'}
                     ios_backgroundColor="#3e3e3e"
                     onValueChange={toggleSwitch2}
                     value={isEnabled2}
                 />
+            </View>
             </View>
             </View>
                 
@@ -46,34 +48,33 @@ const NotificationSettings = (props) => {
 
 const styles = StyleSheet.create({
     container: {
-      alignItems: 'center',
       justifyContent: 'center',
     },
     Header:{
-        textAlign: 'left',
+        alignSelf: 'center',
         fontSize: 40,
-        marginTop: 20,
+        marginTop: '5%',
         // marginLeft: 12,
         color: "#000000",
         fontWeight: "bold",
         },
         Header2:{
             textAlign: 'left',
-            fontSize: 30,
-            marginTop: 10,
+            fontSize: 25,
+            marginTop: '15%',
             color: "#000000",
             // marginLeft: 12
         },
         WelcomeH:{
             textAlign: 'left',
             fontSize: 30,
-            marginTop: 10,
+            marginTop: '5%',
             color: "#000000",
-            marginLeft: 24
+            marginLeft: '35%'
         },
         alertImage:{
           verticalAlign: "center",
-          marginTop: -40,
+          marginTop: '-15%',
           width: 70,
           height: 70,
         },
