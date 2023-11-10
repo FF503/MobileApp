@@ -4,11 +4,14 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Ranking from '../pages/Ranking';
 import About from '../pages/About';
 import { COLORS, STYLES } from '../styles/styles';
+import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
+import { Colors } from 'react-native/Libraries/NewAppScreen';
+
 
 
 const Tabs = () => {
       //const [modalVisible, setModalVisible] = useState(false);
-      const Tab = createBottomTabNavigator();
+      const Tab = createMaterialTopTabNavigator();
   
       const CustomBarButton=({children, onPress} ) => {
         <TouchableOpacity
@@ -37,33 +40,39 @@ const Tabs = () => {
         return(
   
             <Tab.Navigator 
-                    screenOptions = {{
-                  
-                          headerShown: false,
-                          tabBarShowLabel: false,
-                          tabBarStyle:{
+                  tabBarPosition='bottom'
+                  screenOptions = {{
+                        tabBarIndicatorStyle:{
+                              backgroundColor:'transparent'
+                        },
+                        animationEnabled: false,
+                        headerShown: false,
+                        tabBarShowLabel: true,
+                        tabBarLabelStyle: { color:'transparent' },
+                        tabBarStyle:{
                               position:"absolute",
-                                bottom:"2%",
-                                left:"6%",
-                                right:"6%",
-                                elevation:10,
-                                backgroundColor: COLORS.primary,
-                                borderRadius: 5,
-                                height:"10%",
-                                ...style.shadow
-                          }
+                              bottom:"2%",
+                              left:"6%",
+                              right:"6%",
+                              elevation:10,
+                              backgroundColor: COLORS.primary,
+                              borderRadius: 5,
+                              height:"10%",
+                              
+                                
+                              ...style.shadow
+                        }
   
-                    }}
+                  }}
               >
                   <Tab.Screen name="Settings" component={About} options={{ 
                     tabBarIcon:({focused}) => {
-                          return <View style={{backgroundColor:focused?COLORS.white : COLORS.primary,...style.icon}}>
+                          return <View style={{backgroundColor:focused?COLORS.white : 'transparent',...style.iconBg}}>
                                 <Image
                                       resizeMode = 'contain'
                                       style = {{
-                                            width:30,
-                                            height:30,
-                                      tintColor:  focused?COLORS.primary : COLORS.white
+                                      tintColor:  focused?COLORS.primary : COLORS.white,
+                                      ...style.icon
   
                                       }}
                                       //attribution for like flaticon required... graphics pizza
@@ -81,13 +90,12 @@ const Tabs = () => {
 
                   <Tab.Screen name="Roster" component={Ranking} options={{ 
                     tabBarIcon:({focused}) => {
-                          return <View style={{backgroundColor:focused?COLORS.white : COLORS.primary,  ...style.icon}}>
+                          return <View style={{backgroundColor:focused?COLORS.white :  'transparent',  ...style.iconBg}}>
                                 <Image
                                       resizeMode = 'contain'
                                       style = {{
-                                            width:30,
-                                            height:30,
-                                      tintColor:  focused?COLORS.primary : COLORS.white
+                                      tintColor:  focused?COLORS.primary : COLORS.white,
+                                      ...style.icon
   
                                       }}
                                       //attribution for like flaticon required... graphics pizza
@@ -105,14 +113,13 @@ const Tabs = () => {
 
                   <Tab.Screen name="Home" component={About} options={{ 
                     tabBarIcon:({focused}) => {
-                          return <View style={{backgroundColor:focused?COLORS.white : COLORS.primary, ...style.icon}} >
+                          return <View style={{backgroundColor:focused?COLORS.white : 'transparent', ...style.iconBg}} >
                               
                                 <Image
                                       resizeMode = 'contain'
                                       style = {{
-                                            width:30,
-                                            height:30,
-                                      tintColor: focused?COLORS.primary : COLORS.white
+                                      tintColor: focused?COLORS.primary : COLORS.white,
+                                      ...style.icon
   
                                       }}
                                       source = {require('../assets/images/home.png')}
@@ -128,13 +135,12 @@ const Tabs = () => {
 
                   <Tab.Screen name="Events" component={Ranking} options={{ 
                     tabBarIcon:({focused}) => {
-                          return <View style={{backgroundColor:focused?COLORS.white : COLORS.primary, ...style.icon}}>
+                          return <View style={{backgroundColor:focused?COLORS.white : 'transparent', ...style.iconBg}}>
                                 <Image
                                       resizeMode = 'contain'
                                       style = {{
-                                            width:30,
-                                            height:30,
-                                      tintColor:  focused?COLORS.primary : COLORS.white
+                                      tintColor:  focused?COLORS.primary : COLORS.white,
+                                      ...style.icon
   
                                       }}
                                       //attribution for like flaticon required... graphics pizza
@@ -151,13 +157,12 @@ const Tabs = () => {
 
                   <Tab.Screen name="Store" component={About} options={{ 
                     tabBarIcon:({focused}) => {
-                          return <View style={{backgroundColor:focused?COLORS.white : COLORS.primary,  ...style.icon}}>
+                          return <View style={{backgroundColor:focused?COLORS.white :  'transparent',  ...style.iconBg}}>
                                 <Image
                                       resizeMode = 'contain'
                                       style = {{
-                                            width:30,
-                                            height:30,
-                                      tintColor:  focused?COLORS.primary : COLORS.white
+                                      tintColor:  focused?COLORS.primary : COLORS.white,
+                                      ...style.icon
   
                                       }}
                                       //attribution for like flaticon required... graphics pizza
@@ -192,14 +197,19 @@ const style = StyleSheet.create({
             elevation:5
 
       },
-      icon:{
-            width:"80%",
-            height:"80%",
+      iconBg:{
+            alignSelf:"center",
+            width:"250%",
+            height:"250%",
             alignItems:"center", 
             borderRadius: 3, 
-            paddingHorizontal:"3%", 
-            paddingTop:"9%"
+            paddingVertical:"20%",
+            marginVertical:"-14%"
       },
+      icon:{
+            width:30,
+            height:30,
+      }
       
 
 })
