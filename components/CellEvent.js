@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import ScrollPicker from "react-native-wheel-scrollview-picker";
+import { ScrollPicker } from 'react-native-value-picker';
 import { Stylesheet, Text, View, TextInput, StyleSheet, Image, TouchableOpacity, Modal } from 'react-native';
 import { Dropdown } from 'react-native-element-dropdown';
 import DatePicker from 'react-native-date-picker'
@@ -14,7 +14,250 @@ export default function CellEvent({ detail, prop }) {
     const [showModal, setShowModal] = React.useState(false);
     const [output, setOutput] = useState("");
     const [date, setDate] = useState(new Date())
+    const [pickedValue, setPickedValue] = useState();
 
+    MOCK_DATA = [
+        {
+            value: 1,
+            label: '1',
+        },
+        {
+            value: 2,
+            label: '2',
+        },
+        {
+            value: 3,
+            label: '3',
+        },
+        {
+            value: 4,
+            label: '4',
+        },
+        {
+            value: 5,
+            label: '5',
+        },
+        {
+            value: 6,
+            label: '6',
+        },
+        {
+            value: 7,
+            label: '7',
+        },
+        {
+            value: 8,
+            label: '8',
+        },
+        {
+            value: 9,
+            label: '9',
+        },
+        {
+            value: 10,
+            label: '10',
+        },
+        {
+            value: 11,
+            label: '11',
+        },
+        {
+            value: 12,
+            label: '12',
+        },
+        {
+            value: 13,
+            label: '13',
+        },
+        {
+            value: 14,
+            label: '14',
+        },
+        {
+            value: 15,
+            label: '15',
+        },
+        {
+            value: 16,
+            label: '16',
+        },
+        {
+            value: 17,
+            label: '17',
+        },
+        {
+            value: 18,
+            label: '18',
+        },
+        {
+            value: 19,
+            label: '19',
+        },
+        {
+            value: 20,
+            label: '20',
+        },
+        {
+            value: 21,
+            label: '21',
+        },
+        {
+            value: 22,
+            label: '22',
+        },
+        {
+            value: 23,
+            label: '23',
+        },
+        {
+            value: 24,
+            label: '24',
+        },
+        {
+            value: 25,
+            label: '25',
+        },
+        {
+            value: 26,
+            label: '26',
+        },
+        {
+            value: 27,
+            label: '27',
+        },
+        {
+            value: 28,
+            label: '28',
+        },
+        {
+            value: 29,
+            label: '29',
+        },
+        {
+            value: 30,
+            label: '30',
+        },
+        {
+            value: 31,
+            label: '31',
+        },
+        {
+            value: 32,
+            label: '32',
+        },
+        {
+            value: 33,
+            label: '33',
+        },
+        {
+            value: 34,
+            label: '34',
+        },
+        {
+            value: 35,
+            label: '35',
+        },
+        {
+            value: 36,
+            label: '36',
+        },
+        {
+            value: 37,
+            label: '37',
+        },
+        {
+            value: 38,
+            label: '38',
+        },
+        {
+            value: 39,
+            label: '39',
+        },
+        {
+            value: 40,
+            label: '40',
+        },
+        {
+            value: 41,
+            label: '41',
+        },
+        {
+            value: 42,
+            label: '42',
+        },
+        {
+            value: 43,
+            label: '43',
+        },
+        {
+            value: 44,
+            label: '44',
+        },
+        {
+            value: 45,
+            label: '45',
+        },
+        {
+            value: 46,
+            label: '46',
+        },
+        {
+            value: 47,
+            label: '47',
+        },
+        {
+            value: 48,
+            label: '48',
+        },
+        {
+            value: 49,
+            label: '49',
+        },
+        {
+            value: 50,
+            label: '50',
+        },
+        {
+            value: 51,
+            label: '51',
+        },
+        {
+            value: 52,
+            label: '52',
+        },
+        {
+            value: 53,
+            label: '53',
+        },
+        {
+            value: 54,
+            label: '54',
+        },
+        {
+            value: 55,
+            label: '55',
+        },
+        {
+            value: 56,
+            label: '56',
+        },
+        {
+            value: 57,
+            label: '57',
+        },
+        {
+            value: 58,
+            label: '58',
+        },
+        {
+            value: 59,
+            label: '59',
+        },
+        {
+            value: 60,
+            label: '60',
+        },
+    ]
 
     const [index, setIndex] = React.useState(0);
     const ref = React.useRef();
@@ -63,17 +306,17 @@ export default function CellEvent({ detail, prop }) {
             month = "December";
         }
         let timeString = timeList.toString()
-        let time = timeString.substring(0,5)
-        let normalFront = time.substring(0,2)
+        let time = timeString.substring(0, 5)
+        let normalFront = time.substring(0, 2)
         let intNormalFront = parseInt(normalFront)
         let ending = " AM"
-        if(intNormalFront == 12) {
+        if (intNormalFront == 12) {
             ending = " PM"
-        } else if(intNormalFront > 12) {
+        } else if (intNormalFront > 12) {
             intNormalFront -= 12
             ending = " PM"
             console.log("Come here!" + ending)
-        } else if(intNormalFront == 0) {
+        } else if (intNormalFront == 0) {
             intNormalFront = 12
         }
         normalFront = intNormalFront.toString()
@@ -105,30 +348,9 @@ export default function CellEvent({ detail, prop }) {
             />
     } else if (prop == 'scroll') {
         comp =
-            <View style={styles.scrollViewPick}>
-                <ScrollPicker
-                    dataSource={['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21']}
-                    selectedIndex={index}
-                    //
-                    //
-                    //
-                    onValueChange={(data, selectedIndex) => {
-                        //
-                    }}
-                    wrapperHeight={40}
-                    wrapperBackground="#303030"
-                    itemHeight={20}
-                    highlightColor="white"
-                    highlightBorderWidth={1}
-                />
-            </View>
-
-    } else if (prop == 'calander') {
-
-        comp =
             <View style={styles.calanderView}>
                 <TouchableOpacity onPress={() => setShowModal(true)} style={styles.input2}>
-                    <Text style={{ color: 'white', fontSize: 16, textAlign: 'center' }}> {output.toString()} </Text>
+                    <Text style={{ color: 'black', fontSize: 16, textAlign: 'center' }}> {pickedValue} </Text>
                 </TouchableOpacity>
                 <Modal visible={showModal} transparent={true}>
                     <View style={{}}>
@@ -137,27 +359,44 @@ export default function CellEvent({ detail, prop }) {
 
                             </View>
                         </TouchableOpacity>
-                        {/* <View style={{ height: '55%', backgroundColor: 'white', flexDirection: 'column' }}>
-                            <View style={{ backgroundColor: 'white', height: '92%', borderColor: 'transparent', borderWidth: 1, flexDirection: 'column' }}>
-                                <CalendarPicker
-                                    style={{ margin: 40, elevation: 4, borderRadius: 10, height: '50%' }}
-                                    todayBackgroundColor="green"
-                                    selectedDayColor="#87CEEB"
-                                    selectedDayTextColor="#FFFFFF"
-                                    onDateChange={onDateChange}
-                                />
+                        <View style={{ backgroundColor: 'white', alignItems: 'center', justifyContent: 'center', height: '40%', borderTopLeftRadius: 40, borderTopRightRadius: 40, borderWidth: 1, borderColor: 'black' }}>
+                            <ScrollPicker
+                                currentValue={pickedValue}
+                                extraData={pickedValue}
+                                list={MOCK_DATA}
+                                onItemPress={(d) => {
+                                    setPickedValue(d)
+                                    setShowModal(false)
+                                }}
+                                labelColor="black"
+                                selectedColor="blue"
+                            />
+                        </View>
+                    </View>
+                </Modal>
+            </View>
+
+    } else if (prop == 'calander') {
+
+        comp =
+            <View style={styles.calanderView}>
+                <TouchableOpacity onPress={() => setShowModal(true)} style={styles.input2}>
+                    <Text style={{ color: 'black', fontSize: 16, textAlign: 'center' }}> {output.toString()} </Text>
+                </TouchableOpacity>
+                <Modal visible={showModal} transparent={true}>
+                    <View style={{}}>
+                        <TouchableOpacity activeOpacity={1.0} onPress={() => setShowModal(false)} style={{ height: '60%' }}>
+                            <View style={{ height: '100%', width: '100%', backgroundColor: "transparent" }}>
+
                             </View>
-                            <View style={{ flexDirection: 'row', height: '10%', transform: [{ translateY: -8 }] }}>
-                                <TouchableOpacity onPress={() => setShowModal(false)} activeOpacity={1.0} style={styles.closeButton}><Text style={{ fontWeight: 'bold' }}>Close</Text></TouchableOpacity>
-                            </View>
-                        </View> */}
+                        </TouchableOpacity>
                         <View style={{ backgroundColor: 'white', alignItems: 'center', justifyContent: 'center', height: '40%', borderTopLeftRadius: 40, borderTopRightRadius: 40, borderWidth: 1, borderColor: 'black' }}>
                             <DatePicker
                                 date={date}
                                 onDateChange={setDate}
                             />
                             <TouchableOpacity onPress={() => onDateChange(date)} style={{ marginTop: 25, backgroundColor: 'green', width: '75%', borderRadius: 40, paddingTop: 5, paddingBottom: 5 }}>
-                                <Text style={{ fontSize: 20, color: 'white', textAlign: 'center' }}> Select </Text>
+                                <Text style={{ fontSize: 20, color: 'black', textAlign: 'center' }}> Select </Text>
                             </TouchableOpacity>
                         </View>
                     </View>
@@ -196,7 +435,7 @@ export default function CellEvent({ detail, prop }) {
                     setValue(item.value)
                 }}
             />
-    }
+    } 
 
     return (
         <View style={styles.cell}>
@@ -213,15 +452,14 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         width: '95%',
         height: 60,
-        borderWidth: 1,
         marginTop: 5,
         borderRadius: 10,
-        backgroundColor: '#303030',
+        backgroundColor: '#ededed',
         flexDirection: 'row',
     },
 
     detailText: {
-        color: 'white',
+        color: 'black',
         //
         //
         width: '35%',
@@ -237,7 +475,7 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderColor: '#525252',
         paddingLeft: 10,
-        color: 'white',
+        color: 'black',
         textAlign: 'center',
         marginLeft: 5,
         textAlignVertical: "center",
@@ -310,22 +548,22 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderColor: '#525252',
         paddingLeft: 10,
-        color: 'white',
+        color: 'black',
         textAlign: 'center',
         marginLeft: 5,
-        alignContent: 'center', 
+        alignContent: 'center',
         justifyContent: 'center'
     },
 
     selectedTextStyle: {
         fontSize: 16,
-        color: "white",
+        color: "black",
         textAlign: 'center'
     },
 
     placeholderStyle: {
         fontSize: 16,
-        color: "white",
+        color: "black",
         textAlign: 'center'
     },
 
