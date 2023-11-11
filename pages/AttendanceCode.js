@@ -17,7 +17,7 @@ import {
 import { Table, TableWrapper, Row, Rows, Col, Cols, Cell } from 'react-native-reanimated-table';
 import ProgressCircle from 'react-native-progress-circle'
 import Accordion from 'react-native-collapsible/Accordion';
-//import { Camera, useCameraPermission, useCameraDevice } from 'react-native-vision-camera'
+import { COLORS, STYLES } from '../styles/styles';
 import { CameraScreen } from 'react-native-camera-kit';
 
 const AttendanceCode = () => {
@@ -49,7 +49,7 @@ const AttendanceCode = () => {
   )
   const [activeSections, setActiveSections] = useState([])
 
-  const renderHeader = section => {
+  const renderHeader = (section) => {
     let index = activeSections[0];
     let currentObj = list.section[index];
     return (
@@ -87,7 +87,7 @@ const AttendanceCode = () => {
     );
   };
 
-  const renderContent = section => {
+  const renderContent = (section) => {
     return (
       <View style={styles.content}>
         <Table borderStyle={{ borderWidth: 2, borderColor: '#c8e1ff' }}>
@@ -98,14 +98,9 @@ const AttendanceCode = () => {
     );
   };
 
-  const updateSections = activeSections2 => {
+  const updateSections = (activeSections2) => {
     let temp = activeSections2
     setActiveSections(temp)
-  };
-
-  const onOpenlink = () => {
-    // If scanned then function to open URL in Browser
-    Linking.openURL(qrvalue);
   };
 
   const onBarcodeScan = (qrvalue) => {
@@ -170,7 +165,7 @@ const AttendanceCode = () => {
         <ScrollView>
           <View style={{ width: Dimensions.get('window').width, marginTop: 10 }}>
             <View style={{ flexDirection: 'row', width: Dimensions.get('window').width - 10, justifyContent: 'space-between', marginLeft: 10 }}>
-              <Text style={{ fontSize: 35, color: 'black' }}>Attendance</Text>
+              <Text style={[STYLES.title]}>Attendance</Text>
               <TouchableOpacity style={{ marginRight: 5 }}
                 onPress={onOpneScanner}
               >
@@ -187,18 +182,18 @@ const AttendanceCode = () => {
                 keyboardType="numeric"
               />
               <TouchableOpacity style={{ borderWidth: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: 'pink', marginRight: 10 }}>
-                <Text style={{ color: 'black', fontSize: 20, paddingTop: 5, paddingBottom: 5, paddingLeft: 10, paddingRight: 10 }}>Submit</Text>
+                <Text style={[STYLES.textBlack, { paddingHorizontal: 10, paddingVertical: 5 }]}>Submit</Text>
               </TouchableOpacity>
             </View>
             <View style={{ height: 10 }}></View>
-            <Text style={{ fontSize: 35, color: 'black', marginLeft: 10 }}>Roster Requirements</Text>
+            <Text style={[STYLES.title, { marginLeft: 10 }]}>Roster Requirements</Text>
             <View style={{ flexDirection: 'row', }}>
-              <Text style={{ fontWeight: 'bold', fontSize: 20, color: 'black', marginLeft: 10 }}>Name: </Text>
-              <Text style={{ fontSize: 20, color: 'black' }}>Anish Manda</Text>
+              <Text style={[STYLES.textBlack, { fontWeight: 'bold', marginLeft: 10 }]}>Name: </Text>
+              <Text style={[STYLES.textBlack]}>Anish Manda</Text>
             </View>
             <View style={{ flexDirection: 'row', }}>
-              <Text style={{ fontWeight: 'bold', fontSize: 20, color: 'black', marginLeft: 10 }}>Assigned Group: </Text>
-              <Text style={{ fontSize: 20, color: 'black' }}>Web</Text>
+              <Text style={[STYLES.textBlack, { fontWeight: 'bold', marginLeft: 10 }]}>Assigned Group: </Text>
+              <Text style={[STYLES.textBlack]}>Web</Text>
             </View>
             <View style={{ height: 10 }}></View>
             <View style={styles.circle}>
@@ -206,10 +201,10 @@ const AttendanceCode = () => {
                 percent={48}
                 radius={100}
                 borderWidth={8}
-                color="#3399FF"
+                color={COLORS.primary}
                 shadowColor="#999"
                 bgColor="#fff">
-                <Text style={{ fontSize: 22, color: 'black' }}>{'48% Complete'}</Text>
+                <Text style={[STYLES.textBlack, {}]}>{'48% Complete'}</Text>
               </ProgressCircle>
             </View>
             <ScrollView horizontal={true}>
@@ -220,9 +215,9 @@ const AttendanceCode = () => {
                 <Accordion
                   sections={list.section}
                   activeSections={activeSections}
-                  renderHeader={renderHeader}
-                  renderContent={renderContent}
-                  onChange={updateSections}
+                  renderHeader={(p) => renderHeader(p)}
+                  renderContent={(p) => renderContent(p)}
+                  onChange={(p) => updateSections(p)}
                   duration={500}
                   underlayColor="#fff"
                   containerStyle={{ marginLeft: 0 }}
