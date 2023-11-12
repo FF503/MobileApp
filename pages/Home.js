@@ -37,31 +37,51 @@ const Home =()=>{
 
   const [selected, setSelected] = useState('');
   const [trial, setTrial] = useState(0);
+ 
+  const [index, setIndex] = useState();
 
 
   const onDelte = (timee,titlee,ide)=>{
     setTrial(trial+1);
-    console.log("id: "+ide);
+    console.log("id: "+ ide);
     console.log("title: "+titlee);
     console.log("time: "+timee);
-    const index = DATA.indexOf(
-      {
-        id: ide,  
-
-        title: titlee,
-        time: timee
-      }
-    );
+    // const index = DATA.indexOf(
+    //   {
+    //     id: ide,  
+    //     title: titlee,
+    //     time: timee
+    //   }
+    // );
+    const indexT = DATA.findIndex((item) => item.title === titlee);
+    const indexC = DATA.findIndex((item) => item.time === timee);
+    console.log("WOEK PLASE 0")
+    setIndex(indexT)
+    console.log("WOEK PLASE 1")
+    if (indexC>=indexT){
+      console.log("WOEK PLASE 2")
+      setIndex(indexC);
+      console.log("WOEK PLASE 3")
+    }
+    else if(indexT>=indexC){
+      console.log("WOEK PLASE 4")
+      setIndex(indexT);
+      console.log("WOEK PLASE 5")
+    }
+    console.log("WOEK PLASE 6")
     console.log("Title: " + titlee);
-    console.log("Index: "+index);
-    const x = DATA.splice(index, 1);
+    const inde = index;
+    //hopefully the unique thing will work when i get actual sql but this works for now
+    
+    console.log("Index: "+inde);
+    const x = DATA.splice(inde, 1);
     console.log("X: "+x);
     console.log("did it work tho?");
     console.log(DATA);
    }; 
   
 
-  const Item = ({title,time,id}) => (
+  const Item = ({id,title,time}) => (
     <View style={styles.update}>
     <Image
     source={require("../images/alert.png")}
@@ -73,9 +93,11 @@ const Home =()=>{
     <Text style={{fontSize:24,}}>{time}</Text>
     </View>
     <View style={{ flex: 1,flexDirection: "row-reverse", alignSelf:"flex-start"}}>
+      
       <TouchableOpacity 
       onPress={()=> 
-         onDelte(time,title,id)
+        onDelte(time,title,id)
+        //console.log("DA ID IS" + id)
       }
       >
       <Image
@@ -123,8 +145,7 @@ const Home =()=>{
         data={DATA}
         renderItem={({item}) => <Item title={item.title} time={item.time} />}
         keyExtractor={item => item.id}
-        extraData={DATA}
-        
+        extraData={DATA}        
       />
       
     </View>
