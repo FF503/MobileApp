@@ -22,13 +22,82 @@ const DATA = [
   },
 ];
 
+
+
+// DATA.push({
+//   id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
+//   title: '4th Item',
+//   time: "10:00am"
+// })
+//WHen the time is right and I get SQl use the above code to insert sql database values into it
+
+
+
 const Home =()=>{
+
+  const [selected, setSelected] = useState('');
+  const [trial, setTrial] = useState(0);
+
+
+  const onDelte = (timee,titlee,ide)=>{
+    setTrial(trial+1);
+    console.log("id: "+ide);
+    console.log("title: "+titlee);
+    console.log("time: "+timee);
+    const index = DATA.indexOf(
+      {
+        id: ide,  
+
+        title: titlee,
+        time: timee
+      }
+    );
+    console.log("Title: " + titlee);
+    console.log("Index: "+index);
+    const x = DATA.splice(index, 1);
+    console.log("X: "+x);
+    console.log("did it work tho?");
+    console.log(DATA);
+   }; 
+  
+
+  const Item = ({title,time,id}) => (
+    <View style={styles.update}>
+    <Image
+    source={require("../images/alert.png")}
+    style={styles.alertImage}
+    />
+  <View style={{flex: 1,marginLeft:10,flexDirection:"row", }}>
+    <View >
+    <Text style={{fontSize:24,color: "black",fontWeight: "500"}}>{title}</Text>
+    <Text style={{fontSize:24,}}>{time}</Text>
+    </View>
+    <View style={{ flex: 1,flexDirection: "row-reverse", alignSelf:"flex-start"}}>
+      <TouchableOpacity 
+      onPress={()=> 
+         onDelte(time,title,id)
+      }
+      >
+      <Image
+        source={require("../images/Icon_Close.png")}
+        style={{width: 30,
+          height: 30, marginRight:"5%"}}
+      /> 
+      
+       </TouchableOpacity>
+    </View>
+    </View>
+  
+  </View>
+  );
+
+
 // Initialize with today's date
-const [selected, setSelected] = useState('');
+
       //moment().add(7,"days")
     
     return(
-        <View style = {{backgroundColor: "#EDEDED", height: "100%"}}>
+        <ScrollView style = {{backgroundColor: "#EDEDED", height: "100%"}}>
             {/* <Headers centerComponent ={{text: "Home", style: {color: "#fff"}}}/> */}
             <View>
             <Text style={styles.Header}>
@@ -50,10 +119,14 @@ const [selected, setSelected] = useState('');
     </View> */}
  <View style={{marginTop: 10, height:"auto" }}>
   <FlatList
+        nestedScrollEnabled
         data={DATA}
         renderItem={({item}) => <Item title={item.title} time={item.time} />}
         keyExtractor={item => item.id}
+        extraData={DATA}
+        
       />
+      
     </View>
     </View>
     
@@ -95,40 +168,26 @@ const [selected, setSelected] = useState('');
                     textDayFontSize: 20,
                     arrowHeight: 100,
                     arrowWidth:100,
+                    marginBottom: 15,
                     
                 }}
                 
                 
             />
-  </View>
+      <View style={{height: 50}}>
+                {/* <Text>
+                  
+
+                </Text> */}
+      </View>
+  </ScrollView>
         
     )
    
 }
 
 
-const Item = ({title,time}) => (
-  <View style={styles.update}>
-  <Image
-  source={require("../images/alert.png")}
-  style={styles.alertImage}
-  />
-<View style={{flex: 1,marginLeft:10,flexDirection:"row", }}>
-  <View >
-  <Text style={{fontSize:24,color: "black",fontWeight: "500"}}>{title}</Text>
-  <Text style={{fontSize:24,}}>{time}</Text>
-  </View>
-  <View style={{ flex: 1,flexDirection: "row-reverse", alignSelf:"flex-start"}}>
-    <Image
-      source={require("../images/Icon_Close.png")}
-      style={{width: 30,
-        height: 30, marginRight:"5%"}}
-    /> 
-  </View>
-  </View>
 
-</View>
-);
 
 const styles = StyleSheet.create({
     
