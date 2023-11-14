@@ -124,7 +124,7 @@ const Home =()=>{
             <View>
             <Text style={styles.Header}>
              Home</Text>
-      <Text style={styles.WelcomeH}>
+      <Text style={styles.Header2}>
             Welcome (insert name here)</Text>
             </View>
     <View>
@@ -226,13 +226,6 @@ const styles = StyleSheet.create({
         marginTop: 10,
         color: "#000000",
         marginLeft: 12  
-    },
-    WelcomeH:{
-        textAlign: 'left',
-        fontSize: 30,
-        marginTop: 10,
-        color: "#000000",
-        marginLeft: 24
     },
     alertImage:{
       alignSelf: "center",
