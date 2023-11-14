@@ -5,7 +5,7 @@ import { Dropdown } from 'react-native-element-dropdown';
 import DatePicker from 'react-native-date-picker'
 import CalendarPicker from 'react-native-calendar-picker';
 
-export default function CellEvent({ detail, prop }) {
+export default function CellEvent({ detail, prop, propValue }) {
 
     const [text, onChangeText] = React.useState('Useless Text');
     const [number, onChangeNumber] = React.useState.apply('');
@@ -435,7 +435,12 @@ export default function CellEvent({ detail, prop }) {
                     setValue(item.value)
                 }}
             />
-    } 
+    } else if(prop == 'display') {
+        comp =
+            <View style={styles.input3}>
+                <Text style={{ color: 'black', fontSize: 16, textAlign: 'center' }}> {propValue} </Text>
+            </View>
+    }
 
     return (
         <View style={styles.cell}>
@@ -476,7 +481,6 @@ const styles = StyleSheet.create({
         borderColor: '#525252',
         paddingLeft: 10,
         color: 'black',
-        textAlign: 'center',
         marginLeft: 5,
         textAlignVertical: "center",
         paddingBottom: 0,
@@ -501,15 +505,15 @@ const styles = StyleSheet.create({
     },
 
     input3: {
-        height: '100%',
-        alignSelf: 'center',
-        width: '100%',
-        flexDirection: 'row',
-        borderWidth: 1,
-        borderColor: 'white',
-        zIndex: 1,
-        elevation: 1,
+        height: '60%',
+        width: '62%',
         borderRadius: 10,
+        borderColor: '#525252',
+        alignItems: 'center',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        textAlign: 'center',
+        marginLeft: 5
     },
 
     input4: {

@@ -2,7 +2,7 @@ import React from 'react'
 import { Stylesheet, Text, View, TextInput, StyleSheet, Image, TouchableOpacity, Modal, Dimensions } from 'react-native';
 import CellEvent from '../components/CellEvent';
 
-export default function CreateEvent() {
+export default function EventRegistration() {
 
     return (
         <View style={styles.container}>
@@ -10,32 +10,32 @@ export default function CreateEvent() {
                 <Text style={styles.eventText}> Create Event: </Text>
             </View>
             <View style={styles.cellCont}>
-                <CellEvent detail='Event Name:' prop='input' propValue=''>
+                <CellEvent detail='Event Name:' prop='display' propValue='Friends of the Rouge'>
 
                 </CellEvent>
-                <CellEvent detail='Location:' prop='input' propValue=''>
+                <CellEvent detail='Location:' prop='display' propValue='Ishaan Sid Backyard'>
 
                 </CellEvent>
-                <CellEvent detail='Open Seats:' prop='scroll' propValue=''>
+                <CellEvent detail='Open Seats:' prop='display' propValue='100'>
 
                 </CellEvent>
-                <CellEvent detail='Student Lead:' prop='input' propValue=''>
+                <CellEvent detail='Student Lead:' prop='display' propValue='Ishaan Sid'>
 
                 </CellEvent>
-                <CellEvent detail='Mentor Lead:' prop='input' propValue=''>
+                <CellEvent detail='Mentor Lead:' prop='display' propValue='Rakesh Sid+smt'>
 
                 </CellEvent>
-                <CellEvent detail='Start Date:' prop='calander' propValue=''>
+                <CellEvent detail='Start Date:' prop='display' propValue='December 25, 2023 - 3:00 AM'>
 
                 </CellEvent>
-                <CellEvent detail='End Date:' prop='calander' propValue=''>
+                <CellEvent detail='End Date:' prop='display' propValue='December 26, 2023 - 1:00 AM'>
 
                 </CellEvent>
-                <CellEvent detail='Event Type:' prop='dropdown' propValue=''>
+                <CellEvent detail='Event Type:' prop='display' propValue='Community Service'>
 
                 </CellEvent>
-                <TouchableOpacity style={{ borderRadius: 10, backgroundColor: '#ec2578', justifyContent: 'center', alignItems: 'center', width: (Dimensions.get('window'). width) * 9.5/10, height: (Dimensions.get('window').height)/20, marginTop: 10 }}>
-                    <Text style={{ color: 'white', fontSize: 20, textAlign: 'center' }}> Create Event </Text>
+                <TouchableOpacity style={{ borderRadius: 10, backgroundColor: '#ec2578', justifyContent: 'center', alignItems: 'center', width: (Dimensions.get('window').width) * 4.5 / 10, height: (Dimensions.get('window').height) / 16, marginTop: 15 }}>
+                    <Text style={{ color: 'white', fontSize: 20, textAlign: 'center' }}> Register </Text>
                 </TouchableOpacity>
             </View>
 

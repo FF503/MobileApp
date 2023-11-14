@@ -1,11 +1,11 @@
 import React from 'react'
 import {Text, View} from 'react-native'
-import CreateEvent from './pages/CreateEvent'
+import EventRegistration from './pages/EventRegistration'
 
 export default function App() {
   return(
     <View>
-        <CreateEvent></CreateEvent>
+        <EventRegistration></EventRegistration>
     </View>
   );
 }
