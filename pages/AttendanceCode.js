@@ -25,18 +25,18 @@ const AttendanceCode = () => {
   const [opneScanner, setOpneScanner] = useState(false);
   const [number, onChangeNumber] = useState('');
   const [tableData, setTableData] = useState({
-    tableHead: ['', 'Requirement', 'Goal', 'Attended', 'Possible', 'Percent', 'Status'],
+    tableHead: ['Requirement', 'Goal', 'Attended', 'Possible', 'Percent', 'Status'],
     tableHead2: ['Event Date', 'Event Title', 'Cutoff Time', 'Checkin Time', 'Attended'],
-    widthArray: [130, 100, 50, 80, 80, 80,],
-    widthArray2: [104, 104, 104, 104, 104],
-    widthArray3: [100, 50, 80, 80, 80,],
+    widthArray: [105, 40, 60, 60, 60, 50],
+    widthArray2: [72, 73, 74, 82, 74],
+    widthArray3: [40, 60, 60, 60, 50],
   })
   const [list, setList] = useState(
     {
       section: [
         {
           tableTitle: ['Team Meeting'],
-          tableHead: [['1', '1', '1', '1', '1', '1']],
+          tableHead: [['1', '1', '1', '1', '1']],
           tableData: [['1', '2', '1', '2', '1', '2'], ['1', '2', '1', '2', '1', '2'], ['1', '2', '1', '2', '1', '2'], ['1', '2', '1', '2', '1', '2']],
         },
         {
@@ -55,12 +55,12 @@ const AttendanceCode = () => {
     return (
       <View style={styles.header}>
         <View>
-          <View style={{}}>
-            <Table borderStyle={{ borderWidth: 2, borderColor: '#c8e1ff' }}>
+          <View style={{ backgroundColor: COLORS.lightBackground }}>
+            <Table borderStyle={{ borderWidth: 2, borderColor: COLORS.secondary }} style={{}}>
               <TableWrapper style={{ flexDirection: 'row' }}>
                 <Col data={[(
                   <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', width: '100%' }}>
-                    <View style={{ width: '80%' }}>
+                    <View style={{ width: '70%' }}>
                       <Text style={[styles.text, { fontWeight: 'bold' }]}>{section.tableTitle}</Text>
                     </View>
                     <Image
@@ -77,7 +77,8 @@ const AttendanceCode = () => {
                           }
                       }
                     />
-                  </View>)]} style={styles.title} width={130} heightArr={[43]} textStyle={styles.text} />
+                  </View>)]} style={styles.title} width={105} heightArr={[43]} textStyle={styles.text} />
+
                 <Row data={section.tableHead[0]} textStyle={styles.text} widthArr={tableData.widthArray3} height={43} />
               </TableWrapper>
             </Table>
@@ -89,8 +90,8 @@ const AttendanceCode = () => {
 
   const renderContent = (section) => {
     return (
-      <View style={styles.content}>
-        <Table borderStyle={{ borderWidth: 2, borderColor: '#c8e1ff' }}>
+      <View style={[styles.content, { backgroundColor: COLORS.lightBackground }]}>
+        <Table borderStyle={{ borderWidth: 2, borderColor: COLORS.secondary, backgroundColor: COLORS.lightBackground }} style={{}}>
           <Row data={tableData.tableHead2} textStyle={[styles.text, { fontWeight: 'bold' }]} widthArr={tableData.widthArray2} height={43} />
           <Rows data={section.tableData} textStyle={styles.text} widthArr={tableData.widthArray2} />
         </Table>
@@ -181,8 +182,11 @@ const AttendanceCode = () => {
                 placeholder="Attendance Code"
                 keyboardType="numeric"
               />
-              <TouchableOpacity style={{ borderWidth: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: 'pink', marginRight: 10 }}>
+              {/* <TouchableOpacity style={{ borderWidth: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: 'pink', marginRight: 10 }}>
                 <Text style={[STYLES.textBlack, { paddingHorizontal: 10, paddingVertical: 5 }]}>Submit</Text>
+              </TouchableOpacity> */}
+              <TouchableOpacity style={{ backgroundColor: '#ec2578', justifyContent: 'center', alignItems: 'center', width: (Dimensions.get('window').width) / 4, height: 40, marginRight: 10, borderRadius: 10 }}>
+                <Text style={{ color: 'white', fontSize: 20, textAlign: 'center' }}> Register </Text>
               </TouchableOpacity>
             </View>
             <View style={{ height: 10 }}></View>
@@ -207,9 +211,9 @@ const AttendanceCode = () => {
                 <Text style={[STYLES.textBlack, {}]}>{'48% Complete'}</Text>
               </ProgressCircle>
             </View>
-            <ScrollView horizontal={true}>
-              <View style={{ marginLeft: 10, marginRight: 10 }}>
-                <Table borderStyle={{ borderWidth: 2, borderColor: '#c8e1ff', padding: 2 }}>
+            <ScrollView horizontal={true} scrollEnabled={false}>
+              <View style={{ marginLeft: 10, marginRight: 10, }}>
+                <Table borderStyle={{ padding: 0, borderWidth: 2 }} style={{ backgroundColor: COLORS.lightBackground }}>
                   <Row data={tableData.tableHead} textStyle={[styles.text, { fontWeight: 'bold' }]} widthArr={tableData.widthArray} height={43} />
                 </Table>
                 <Accordion
@@ -272,7 +276,7 @@ const styles = StyleSheet.create({
     marginTop: 25,
     marginBottom: 25
   },
-  text: { padding: 2.5, color: 'black', justifyContent: 'center', textAlign: 'center' },
+  text: { padding: 2.5, color: 'black', justifyContent: 'center', textAlign: 'center', fontSize: 12 },
   content: {
     backgroundColor: '#FFFFFF',
     marginTop: 1,
