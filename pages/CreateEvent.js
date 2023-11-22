@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { Stylesheet, Text, View, TextInput, StyleSheet, Image, TouchableOpacity, Modal, Dimensions } from 'react-native';
+import { Stylesheet, Text, View, StyleSheet, Image, TouchableOpacity, Modal, Dimensions } from 'react-native';
 import CellEvent from '../components/CellEvent';
 import QRCodeIcon from '../images/qrCodeIcon.png';
+import { COLORS } from '../styles/styles';
 
 export default function CreateEvent() {
 
@@ -60,7 +61,7 @@ export default function CreateEvent() {
                         </View>
                     </View>
                 </Modal>
-                <TouchableOpacity style={{ borderRadius: 10, backgroundColor: '#ec2578', justifyContent: 'center', alignItems: 'center', width: (Dimensions.get('window').width) * 4.5 / 10, height: (Dimensions.get('window').height) / 16, marginTop: 15 }}>
+                <TouchableOpacity style={{ borderRadius: 10, backgroundColor: COLORS.primary, justifyContent: 'center', alignItems: 'center', width: (Dimensions.get('window').width) * 4.5 / 10, height: (Dimensions.get('window').height) / 16, marginTop: 15 }}>
                     <Text style={{ color: 'white', fontSize: 20, textAlign: 'center' }}> Create Event </Text>
                 </TouchableOpacity>
             </View>
@@ -83,17 +84,13 @@ const styles = StyleSheet.create({
         width: '80%',
         alignItems: 'left',
         justifyContent: 'center',
-        // borderWidth: 1, 
-        // borderColor: 'black'
-    
     },
+
     eventCont2: {
         height: '100%',
         width: '20%',
         alignItems: 'center',
         justifyContent: 'center',
-        // borderWidth: 1, 
-        // borderColor: 'black'
     },
 
     eventText: {

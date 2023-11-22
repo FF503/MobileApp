@@ -6,8 +6,8 @@ import CreateEvent from './pages/CreateEvent';
 export default function App() {
   return(
     <View>
-        <CreateEvent></CreateEvent>
-        {/* <EventRegistration></EventRegistration> */}
+        {/* <CreateEvent></CreateEvent> */}
+        <EventRegistration></EventRegistration>
     </View>
   );
 }
