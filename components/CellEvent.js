@@ -3,7 +3,6 @@ import { ScrollPicker } from 'react-native-value-picker';
 import { Stylesheet, Text, View, TextInput, StyleSheet, Image, TouchableOpacity, Modal } from 'react-native';
 import { Dropdown } from 'react-native-element-dropdown';
 import DatePicker from 'react-native-date-picker'
-import CalendarPicker from 'react-native-calendar-picker';
 
 export default function CellEvent({ detail, prop, propValue }) {
 
@@ -257,6 +256,46 @@ export default function CellEvent({ detail, prop, propValue }) {
             value: 60,
             label: '60',
         },
+        {
+            value: 61,
+            label: '61',
+        },
+        {
+            value: 62,
+            label: '62',
+        },
+        {
+            value: 63,
+            label: '63',
+        },
+        {
+            value: 64,
+            label: '64',
+        },
+        {
+            value: 65,
+            label: '65',
+        },
+        {
+            value: 66,
+            label: '66',
+        },
+        {
+            value: 67,
+            label: '67',
+        },
+        {
+            value: 68,
+            label: '68',
+        },
+        {
+            value: 69,
+            label: '69',
+        },
+        {
+            value: 70,
+            label: '70',
+        },
     ]
 
     const [index, setIndex] = React.useState(0);
@@ -402,22 +441,6 @@ export default function CellEvent({ detail, prop, propValue }) {
                     </View>
                 </Modal>
             </View>
-
-        {/* <View style={styles.input3}>
-                    <View style={styles.calTextView}>
-                    </View>
-                    <TouchableOpacity activeOpacity={1} style={styles.calIconView}>
-                        <Image style={styles.calIcon} source={require("../images/calanderIcon.png")} />
-                    </TouchableOpacity>
-                </View> */}
-        {/* <View style={styles.input4}>
-                    <View style={styles.calTextView}>
-                    </View>
-                    <TouchableOpacity activeOpacity={1} style={styles.calIconView}>
-                        <Image style={styles.calIcon} source={require("../images/calanderIcon.png")} />
-                    </TouchableOpacity>
-                </View> */}
-
 
     } else if (prop == 'dropdown') {
         comp =

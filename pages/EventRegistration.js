@@ -1,4 +1,3 @@
-import React from 'react'
 import { Stylesheet, Text, View, TextInput, StyleSheet, Image, TouchableOpacity, Modal, Dimensions } from 'react-native';
 import CellEvent from '../components/CellEvent';
 
@@ -7,7 +6,7 @@ export default function EventRegistration() {
     return (
         <View style={styles.container}>
             <View style={styles.eventCont}>
-                <Text style={styles.eventText}> Create Event: </Text>
+                <Text style={styles.eventText}> Event Details: </Text>
             </View>
             <View style={styles.cellCont}>
                 <CellEvent detail='Event Name:' prop='display' propValue='Friends of the Rouge'>
