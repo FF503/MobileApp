@@ -1,12 +1,15 @@
 import {React,useState,} from 'react'
-import {View,TouchableOpacity,Text,StyleSheet, ScrollView,Dimensions} from 'react-native'
+import {View,TouchableOpacity,Text,StyleSheet, ScrollView,Dimensions,LayoutAnimation} from 'react-native'
 const Dropdown = (props) => {
     const [state,setState] = useState(true)
     const [items,setItems] = useState(props.items)
+    const [pressed,setPressed] = useState(false);
+    let currentPressed = pressed;
     const header = props.header;
-    var currentState = state;
+    let currentState = state;
     var height = Dimensions.get('window').height; 
     const changeState = () => {
+        LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
         //setState(!currentState)
         currentState = !currentState
         console.log("changed")
@@ -15,9 +18,15 @@ const Dropdown = (props) => {
     }
     const callCallback = (item,index) => {
         item.callback(item,index)
+        currentPressed = true;
+        LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
+        changeState();
     }
     if(currentState != state) {
         setState(currentState)
+    }
+    if(currentPressed != pressed) {
+        setPressed(currentPressed);
     }
     /*if(curSelectedValue != selected) {
         setSelected(curSelectedValue)
@@ -27,18 +36,22 @@ const Dropdown = (props) => {
         <View style={{paddingHorizontal:10}}>
             <View style={styles.containerStyle}>
                 <View style={styles.headerStyle}>
-                <TouchableOpacity onPress={()=>{changeState()}} style={{flex:1,flexDirection:'column'}}>
+                <TouchableOpacity activeOpacity={1} onPress={()=>{changeState()}} style={{flex:1,flexDirection:'column',justifyContent:'center'}}>
                     <View style={{}}><Text style={{fontSize:25,fontFamily:'Open-Sans',color:'#000000'}}>{header}</Text></View>
                 </TouchableOpacity>
-                <View style={{flex: 0.05, height: 1, backgroundColor: 'black'}} />
+                <View style={{flex:0.05,justifyContent:'center',flexDirection:'row'}}>
+                    <View style={{height: 1, backgroundColor: 'black',width:(currentState == true) ? '100%' : '0%'}} />
                 </View>
-                <ScrollView style={{display :(currentState == true) ? 'display': 'none',backgroundColor:'#e5e5e5',maxHeight: (currentState == true) ? height*0.1 : '%0'}}>
+                
+                </View>
+                {/*<View style={{height: (currentState == true) ? 0 : 100,backgroundColor:'red'}}></View>*/}
+                <ScrollView style={{backgroundColor:'#e5e5e5',height: (currentState == true) ? height*0.1 : 0}}>
                     {items.map((item,idx) => {
                         return(
                         <View key={idx} style={{flex:1,flexDirection:'row'}}>
-                            <TouchableOpacity onPress={()=>{callCallback(item,idx)}} style={{flex:9}}>
-                                <Text key={idx} style={{fontSize:18,fontFamily:'Open-Sans',color:'#000000'}}>{item.value}</Text>
-                            </TouchableOpacity>
+                            {/*<TouchableOpacity onPress={()=>{callCallback(item,idx)}} style={{flex:9}}>*/}
+                                <Text onPress={(e)=>{callCallback(item,idx); }} key={idx} style={{fontSize:18,fontFamily:'Open-Sans',color:'#000000',opacity:(pressed==true) ? 0.5 : 1}}>{item.value}</Text>
+                            {/*</TouchableOpacity>*/}
                             <View style={{flex:1}}></View>
                         </View>
                         )
@@ -67,7 +80,7 @@ const styles = StyleSheet.create({
         backgroundColor:'#e5e5e5',
         borderColor:'#e5e5e5',
         borderRadius:8,
-        backgroundColor:'#11111',
+        //backgroundColor:'#11111',
         //flex:1,
         //flexDirection:'column',
         borderWidth:4,
