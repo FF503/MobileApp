@@ -4,6 +4,7 @@ import Ranking from '../pages/Ranking';
 import About from '../pages/About';
 import { COLORS, STYLES } from '../styles/styles';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
+import Home from '../pages/Home';
 
 const Tabs = () => {
       //const [modalVisible, setModalVisible] = useState(false);
@@ -108,7 +109,7 @@ const Tabs = () => {
                     }
                   }} />
 
-                  <Tab.Screen name="Home" component={About} options={{ 
+                  <Tab.Screen name="Home" component={Home} options={{ 
                     tabBarIcon:({focused}) => {
                           return <View style={{backgroundColor:focused?COLORS.white : 'transparent', ...style.iconBg}} >
                               

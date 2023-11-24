@@ -4,8 +4,6 @@ import { NavigationContainer } from '@react-navigation/native';
 import Tabs from './navigation/Tabs';
 
 import Home from './pages/Home'
-import FList from './pages/fList'
-import Calendor from './pages/Calendar'
 
 const App = () => {
   return(
