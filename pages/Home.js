@@ -1,7 +1,9 @@
 import React, {useState} from 'react'
 import { Calendar } from 'react-native-calendars'; 
 import {TextInput, View, Text, Button,Image, FlatList,Touchable, TouchableOpacity, ScrollView,StyleSheet,Headers} from 'react-native'
-import moment from 'moment';
+import { COLORS, STYLES } from '../styles/styles';
+import { Colors } from 'react-native/Libraries/NewAppScreen';
+
 console.log("WE OPEN ")
 
 const DATA = [
@@ -43,32 +45,16 @@ const Home =()=>{
 
   const onDelte = (timee,titlee,ide)=>{
     setTrial(trial+1);
-    console.log("id: "+ ide);
-    console.log("title: "+titlee);
-    console.log("time: "+timee);
-    // const index = DATA.indexOf(
-    //   {
-    //     id: ide,  
-    //     title: titlee,
-    //     time: timee
-    //   }
-    // );
+
     const indexT = DATA.findIndex((item) => item.title === titlee);
     const indexC = DATA.findIndex((item) => item.time === timee);
-    console.log("WOEK PLASE 0")
     setIndex(indexT)
-    console.log("WOEK PLASE 1")
     if (indexC>=indexT){
-      console.log("WOEK PLASE 2")
       setIndex(indexC);
-      console.log("WOEK PLASE 3")
     }
     else if(indexT>=indexC){
-      console.log("WOEK PLASE 4")
       setIndex(indexT);
-      console.log("WOEK PLASE 5")
     }
-    console.log("WOEK PLASE 6")
     console.log("Title: " + titlee);
     const inde = index;
     //hopefully the unique thing will work when i get actual sql but this works for now
@@ -89,7 +75,7 @@ const Home =()=>{
     />
   <View style={{flex: 1,marginLeft:10,flexDirection:"row", }}>
     <View >
-    <Text style={{fontSize:24,color: "black",fontWeight: "500"}}>{title}</Text>
+    <Text style={{fontSize:24,color: COLORS.secondary,fontWeight: "500"}}>{title}</Text>
     <Text style={{fontSize:24,}}>{time}</Text>
     </View>
     <View style={{ flex: 1,flexDirection: "row-reverse", alignSelf:"flex-start"}}>
@@ -114,12 +100,9 @@ const Home =()=>{
   );
 
 
-// Initialize with today's date
-
-      //moment().add(7,"days")
     
     return(
-        <ScrollView style = {{backgroundColor: "#EDEDED", height: "100%"}}>
+        <ScrollView style = {{backgroundColor: COLORS.white, height: "100%"}}>
             {/* <Headers centerComponent ={{text: "Home", style: {color: "#fff"}}}/> */}
             <View>
             <Text style={styles.Header}>
@@ -129,16 +112,7 @@ const Home =()=>{
             </View>
     <View>
     <Text style={styles.Header2}>Recent Updates</Text>
-    {/* <View style={styles.update}>
-      <Image
-      source={require("../images/alert.png")}
-      style={styles.alertImage}
-      />
-    <View style={{alignSelf:"center",marginLeft:10}}>
-      <Text style={{fontSize:24,color: "black",fontWeight: "500"}}>Mech Meet Up Room 186</Text>
-      <Text style={{fontSize:24,}}>10:00 a.m.</Text>
-      </View>
-    </View> */}
+   
  <View style={{marginTop: 10, height:"auto" }}>
   <FlatList
         nestedScrollEnabled
@@ -156,7 +130,7 @@ const Home =()=>{
     marginLeft: "2.5%",
     height: ".75%",
     width: "95%",
-    backgroundColor: "black"
+    backgroundColor: COLORS.secondary
     // borderBottomColor: 'black',
     // borderBottomWidth: StyleSheet.hairlineWidth,
   }}
@@ -169,18 +143,18 @@ const Home =()=>{
                 }}
                 //markingType={'period'}
                 markedDates={{
-                [selected]: {selected: true, disableTouchEvent: true, selectedDotColor: 'pink'},
+                [selected]: {selected: true, disableTouchEvent: true, selectedDotColor: COLORS.primary},
                 //'2023-05-06': {marked: true, dotColor: '#50cebb'},
                 }}
                 theme={{
-                    backgroundColor: '#ffffff',
-                    calendarBackground: '#ffffff',
-                    textSectionTitleColor: 'pink', //colors days of week
-                    selectedDayBackgroundColor: '#00adf5',
-                    selectedDayTextColor: '#ffffff',
-                    todayTextColor: '#00adf5',
-                    dayTextColor: '#2d4150',
-                    textDisabledColor: 'gray',
+                    backgroundColor: COLORS.white,
+                    calendarBackground: COLORS.white,
+                    textSectionTitleColor: COLORS.primary, //colors days of week
+                    selectedDayBackgroundColor: COLORS.primary,
+                    selectedDayTextColor: COLORS.white,
+                    todayTextColor: COLORS.primary,
+                    dayTextColor: COLORS.textGray,
+                    textDisabledColor: COLORS.textGray,
                     textMonthFontSize: 32, 
                     textDayHeaderFontSize: 16,
                     rightArrow: 100,
@@ -217,14 +191,14 @@ const styles = StyleSheet.create({
     fontSize: 40,
     marginTop: 20,
     marginLeft: 12,
-    color: "#000000",
+    color: COLORS.secondary,
     fontWeight: "bold"
     },
     Header2:{
         textAlign: 'left',
         fontSize: 30,
         marginTop: 10,
-        color: "#000000",
+        color: COLORS.secondary,
         marginLeft: 12  
     },
     alertImage:{
@@ -239,7 +213,7 @@ const styles = StyleSheet.create({
     update: {
         // height: 75,
         flexDirection:'row',
-        backgroundColor: 'white',
+        backgroundColor: COLORS.white,
         borderRadius: 8,
         
         width: '95%',
@@ -247,7 +221,7 @@ const styles = StyleSheet.create({
         alignSelf: "center",
         marginBottom:20,
         
-        shadowColor: '#171717',
+        shadowColor: COLORS.secondary,
         shadowOffset: {width: -2, height: 4},
         shadowOpacity: 0.2,
         shadowRadius: 3,
