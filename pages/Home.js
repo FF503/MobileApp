@@ -1,12 +1,17 @@
 import React, {useState} from 'react'
 import { Calendar } from 'react-native-calendars'; 
-import {TextInput, View, Text, Button,Image, FlatList,Touchable, TouchableOpacity, ScrollView,StyleSheet,Headers} from 'react-native'
-import { COLORS, STYLES } from '../styles/styles';
+import {TextInput, View, Text, Button,Image, FlatList,Touchable, TouchableOpacity, ScrollView,StyleSheet,Headers,Route} from 'react-native'
+import { COLORS, STYLES } from '../styles/styles';  
+import About from '../pages/About';
+
 import { Colors } from 'react-native/Libraries/NewAppScreen';
+import { render } from '@testing-library/react-native';
+import { Navigation } from 'react-calendar';
+
 
 console.log("WE OPEN ")
-
-const DATA = [
+//const [i, setI] = useState(3);
+const DATA1 = [
   {
     id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
     title: 'First Item',
@@ -22,7 +27,20 @@ const DATA = [
     title: 'Third Item',
     time: "10:00am"
   },
+  {
+    id: '32384392h-3da1-471f-bd96-145571e29d72',
+    title: 'Fourth Item',
+    time: "1:00am"
+  },
 ];
+DATA= []
+  for(let i= 0;i<DATA1.length; i++){
+    if (i<3){
+      DATA.push(DATA1[i])
+    }
+ 
+  }
+console.log(DATA)
 
 
 
@@ -35,28 +53,39 @@ const DATA = [
 
 
 
-const Home =()=>{
+const Home =(navigation)=>{
 
   const [selected, setSelected] = useState('');
   const [trial, setTrial] = useState(0);
  
-  const [index, setIndex] = useState();
+ 
+
 
 
   const onDelte = (timee,titlee,ide)=>{
     setTrial(trial+1);
-
+    
     const indexT = DATA.findIndex((item) => item.title === titlee);
     const indexC = DATA.findIndex((item) => item.time === timee);
-    setIndex(indexT)
+    console.log("0")
+    console.log("The Scuffed title is "+indexT);
+    console.log("The Scuffed time is "+indexC);
+    const indo = indexT
+    
+    console.log("INDEX1 IS: " + indo);
     if (indexC>=indexT){
-      setIndex(indexC);
+      console.log("1")
+      const indo=indexC
     }
+
     else if(indexT>=indexC){
-      setIndex(indexT);
+      console.log("2")
+      const indo = indexT;
     }
+    console.log("3")
     console.log("Title: " + titlee);
-    const inde = index;
+    console.log("INDEX IS: " + indo);
+    const inde = indo;
     //hopefully the unique thing will work when i get actual sql but this works for now
     
     console.log("Index: "+inde);
@@ -103,6 +132,7 @@ const Home =()=>{
     
     return(
         <ScrollView style = {{backgroundColor: COLORS.white, height: "100%"}}>
+         
             {/* <Headers centerComponent ={{text: "Home", style: {color: "#fff"}}}/> */}
             <View>
             <Text style={styles.Header}>
@@ -111,8 +141,27 @@ const Home =()=>{
             Welcome (insert name here)</Text>
             </View>
     <View>
-    <Text style={styles.Header2}>Recent Updates</Text>
+
+    <View style={{flex: 1,marginLeft:10,flexDirection:"row", }}>
+    <View >
    
+    <Text style={styles.Header2}>Recent Updates</Text>
+    </View>
+    <View style={{ flex: 1,flexDirection: "row-reverse", alignSelf:"flex-start"}}>
+      
+      <TouchableOpacity 
+      onPress={
+        console.log("HOHOOHOH")
+      }
+      >
+      <Text style={{color:COLORS.primary, marginRight: "5%",fontSize:20,marginTop:"20%"}}>
+        see more...
+      </Text>
+      
+       </TouchableOpacity>
+    </View>
+    </View>
+
  <View style={{marginTop: 10, height:"auto" }}>
   <FlatList
         nestedScrollEnabled
