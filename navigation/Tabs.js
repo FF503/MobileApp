@@ -5,10 +5,11 @@ import About from '../pages/About';
 import { COLORS, STYLES } from '../styles/styles';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 
+
 const Tabs = () => {
       //const [modalVisible, setModalVisible] = useState(false);
       const Tab = createMaterialTopTabNavigator();
-  
+ 
       const CustomBarButton=({children, onPress} ) => {
         <TouchableOpacity
               style={{
@@ -30,12 +31,12 @@ const Tabs = () => {
                     {children}
               </View>
         </TouchableOpacity>
-  
+ 
       }
-  
+ 
         return(
-  
-            <Tab.Navigator 
+ 
+            <Tab.Navigator
                   initialRouteName='Home'
                   tabBarPosition='bottom'
                   screenOptions = {{
@@ -55,14 +56,14 @@ const Tabs = () => {
                               backgroundColor: COLORS.primary,
                               borderRadius: 5,
                               height:"10%",
-                              
-                                
+                             
+                               
                               ...style.shadow
                         }
-  
+ 
                   }}
               >
-                  <Tab.Screen name="Settings" component={About} options={{ 
+                  <Tab.Screen name="Settings" component={About} options={{
                     tabBarIcon:({focused}) => {
                           return <View style={{backgroundColor:focused?COLORS.white : 'transparent',...style.iconBg}}>
                                 <Image
@@ -70,22 +71,23 @@ const Tabs = () => {
                                       style = {{
                                       tintColor:  focused?COLORS.primary : COLORS.white,
                                       ...style.icon
-  
+ 
                                       }}
                                       //attribution for like flaticon required... graphics pizza
                                       source = {require('../assets/images/setting.png')}
                                       //key={this.state.source.uri}
-  
+ 
                                 />
                                 <Text
                                 style={{color:focused?COLORS.primary : COLORS.white, fontSize:15, marginBottom:"5%"}}
                                 >Setting</Text>
                           </View>
-                          
+                         
                     }
                   }} />
 
-                  <Tab.Screen name="Roster" component={Ranking} options={{ 
+
+                  <Tab.Screen name="Roster" component={Ranking} options={{
                     tabBarIcon:({focused}) => {
                           return <View style={{backgroundColor:focused?COLORS.white :  'transparent',  ...style.iconBg}}>
                                 <Image
@@ -93,44 +95,46 @@ const Tabs = () => {
                                       style = {{
                                       tintColor:  focused?COLORS.primary : COLORS.white,
                                       ...style.icon
-  
+ 
                                       }}
                                       //attribution for like flaticon required... graphics pizza
                                       source = {require('../assets/images/to-do-list.png')}
                                       //key={this.state.source.uri}
-  
+ 
                                 />
                                 <Text
                                 style={{color:focused?COLORS.primary : COLORS.white, fontSize:15, marginBottom:"5%"}}
                                 >Roster</Text>
                           </View>
-                          
+                         
                     }
                   }} />
 
-                  <Tab.Screen name="Home" component={About} options={{ 
+
+                  <Tab.Screen name="Home" component={About} options={{
                     tabBarIcon:({focused}) => {
                           return <View style={{backgroundColor:focused?COLORS.white : 'transparent', ...style.iconBg}} >
-                              
+                             
                                 <Image
                                       resizeMode = 'contain'
                                       style = {{
                                       tintColor: focused?COLORS.primary : COLORS.white,
                                       ...style.icon
-  
+ 
                                       }}
                                       source = {require('../assets/images/home.png')}
-  
+ 
                                 />
-                                <Text 
+                                <Text
                                 style={{color:focused?COLORS.primary : COLORS.white, fontSize:15, marginBottom:"5%"}}
                                 >Home</Text>
                           </View>
-                          
+                         
                     }
                   }} />
 
-                  <Tab.Screen name="Events" component={Ranking} options={{ 
+
+                  <Tab.Screen name="Events" component={Ranking} options={{
                     tabBarIcon:({focused}) => {
                           return <View style={{backgroundColor:focused?COLORS.white : 'transparent', ...style.iconBg}}>
                                 <Image
@@ -138,21 +142,22 @@ const Tabs = () => {
                                       style = {{
                                       tintColor:  focused?COLORS.primary : COLORS.white,
                                       ...style.icon
-  
+ 
                                       }}
                                       //attribution for like flaticon required... graphics pizza
                                       source = {require('../assets/images/events.png')}
-  
+ 
                                 />
                                 <Text
                                 style={{color:focused?COLORS.primary : COLORS.white, fontSize:15, marginBottom:"5%"}}
                                 >Events</Text>
                           </View>
-                          
+                         
                     }
                   }} />
 
-                  <Tab.Screen name="Store" component={About} options={{ 
+
+                  <Tab.Screen name="Rank" component={About} options={{
                     tabBarIcon:({focused}) => {
                           return <View style={{backgroundColor:focused?COLORS.white :  'transparent',  ...style.iconBg}}>
                                 <Image
@@ -160,27 +165,28 @@ const Tabs = () => {
                                       style = {{
                                       tintColor:  focused?COLORS.primary : COLORS.white,
                                       ...style.icon
-  
+ 
                                       }}
                                       //attribution for like flaticon required... graphics pizza
-                                      source = {require('../assets/images/setting.png')}
+                                      source = {require('../assets/images/ranking.png')}
                                       //key={this.state.source.uri}
-  
+ 
                                 />
                                 <Text
                                 style={{color:focused?COLORS.primary : COLORS.white, fontSize:15, marginBottom:"5%"}}
                                 >Store</Text>
                           </View>
-                          
+                         
                     }
                   }} />
-  
-              
+ 
+             
             </Tab.Navigator>
-              
-            
+             
+           
         )
   }
+
 
 const style = StyleSheet.create({
       shadow:{
@@ -193,13 +199,14 @@ const style = StyleSheet.create({
             shadowRadius:3.5,
             elevation:5
 
+
       },
       iconBg:{
             alignSelf:"center",
             width:"250%",
             height:"250%",
-            alignItems:"center", 
-            borderRadius: 3, 
+            alignItems:"center",
+            borderRadius: 3,
             paddingVertical:"20%",
             marginVertical:"-14%"
       },
@@ -207,9 +214,10 @@ const style = StyleSheet.create({
             width:30,
             height:30,
       }
-      
+     
+
 
 })
 
-export default Tabs;
 
+export default Tabs;
