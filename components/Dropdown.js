@@ -37,7 +37,7 @@ const Dropdown = (props) => {
             <View style={styles.containerStyle}>
                 <View style={styles.headerStyle}>
                 <TouchableOpacity activeOpacity={1} onPress={()=>{changeState()}} style={{flex:1,flexDirection:'column',justifyContent:'center'}}>
-                    <View style={{}}><Text style={{fontSize:25,fontFamily:'Open-Sans',color:'#000000'}}>{header}</Text></View>
+                    <View style={{}}><Text style={{fontSize:21,fontFamily:'Open-Sans',color:'#000000'}}>{header}</Text></View>
                 </TouchableOpacity>
                 <View style={{flex:0.05,justifyContent:'center',flexDirection:'row'}}>
                     <View style={{height: 1, backgroundColor: 'black',width:(currentState == true) ? '100%' : '0%'}} />

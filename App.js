@@ -2,7 +2,7 @@ import React from 'react'
 
 import {Text, View,UIManager} from 'react-native'
 
-import Settings from './pages/Settings'
+import NotificationSettings from './pages/NotificationSettings'
 
 const App = () => {
     if (
@@ -12,7 +12,7 @@ const App = () => {
         UIManager.setLayoutAnimationEnabledExperimental(true);
       }
     return (
-            <Settings></Settings>
+            <NotificationSettings></NotificationSettings>
     )
 }
 
